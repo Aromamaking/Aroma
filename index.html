@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>یک نامه عاشقانه برای تو</title>
+    <!-- استفاده از Tailwind CSS برای استایل‌دهی -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- فونت‌های گوگل -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* استایل‌های سفارشی */
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #fdf2f8; /* صورتی خیلی روشن */
+        }
+        .font-lalezar {
+            font-family: 'Lalezar', cursive;
+        }
+        /* انیمیشن برای قلب */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        .heart-pulse {
+            animation: pulse 2s infinite;
+        }
+        /* انیمیشن محو شدن به داخل */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        /* برای تاخیر در انیمیشن‌ها */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+    </style>
+</head>
+<body class="bg-rose-50 text-gray-700">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+        
+        <!-- بخش هدر -->
+        <header class="text-center py-12">
+            <div class="inline-block heart-pulse mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <h1 class="font-lalezar text-4xl md:text-6xl text-rose-800 fade-in">برای تنها عشق زندگیم</h1>
+            <p class="mt-4 text-xl text-rose-600 fade-in delay-1">این صفحه تقدیم به تو، متینه عزیزم</p>
+        </header>
+
+        <!-- بخش پیام اصلی -->
+        <main class="bg-white rounded-2xl shadow-lg p-6 md:p-10 my-8 fade-in delay-2">
+            <h2 class="font-lalezar text-2xl text-rose-700 mb-4">پیامی از قلبم</h2>
+            <p class="text-base md:text-lg leading-relaxed">
+                هر روز که با تو می‌گذرد، بیشتر از قبل به این حقیقت پی می‌برم که خوشبختی واقعی در کنار تو بودن است. تو نه تنها عشق من، بلکه بهترین دوست، همراه و بزرگترین انگیزه‌ی من برای پیشرفت هستی. لبخند تو، زیباترین منظره‌ای است که تا به حال دیده‌ام و صدای تو، آرامش‌بخش‌ترین موسیقی دنیاست. ممنونم که هستی و دنیای من را زیباتر می‌کنی.
+            </p>
+        </main>
+
+        <!-- گالری خاطرات -->
+        <section class="my-12 fade-in delay-3">
+            <h2 class="font-lalezar text-center text-3xl text-rose-800 mb-8">گوشه‌ای از خاطرات شیرین ما</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- عکس اول: آدرس به فایل داخل فولدر matine.jpg اشاره می‌کند -->
+                <div class="transform hover:scale-105 transition-transform duration-300">
+                    <img src="matine.jpg/photo20022510520.jpg" alt="تصویر خاطره اول" class="rounded-xl shadow-md w-full h-full object-cover">
+                </div>
+                <!-- عکس دوم: آدرس به فایل داخل فولدر matine.jpg اشاره می‌کند -->
+                <div class="transform hover:scale-105 transition-transform duration-300">
+                    <img src="matine.jpg/photo20022510561.jpg" alt="تصویر خاطره دوم" class="rounded-xl shadow-md w-full h-full object-cover">
+                </div>
+                <!-- عکس سوم: آدرس به فایل داخل فولدر matine.jpg اشاره می‌کند -->
+                <div class="transform hover:scale-105 transition-transform duration-300">
+                    <img src="matine.jpg/photo20022510686.jpg" alt="تصویر خاطره سوم" class="rounded-xl shadow-md w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش دلایل دوست داشتن -->
+        <section class="bg-white rounded-2xl shadow-lg p-6 md:p-10 my-8 text-center fade-in delay-4">
+            <h2 class="font-lalezar text-2xl text-rose-700 mb-4">چند دلیل (از بی‌نهایت) که چرا دوستت دارم...</h2>
+            <div id="reason-display" class="min-h-[6rem] flex items-center justify-center p-4 my-4 bg-rose-100 rounded-lg text-rose-800 text-lg font-semibold transition-all duration-300">
+                برای دیدن یک دلیل جدید، روی دکمه کلیک کن!
+            </div>
+            <button id="reason-button" class="bg-red-500 text-white font-bold py-3 px-8 rounded-full hover:bg-red-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
+                یک دلیل دیگر به من بگو!
+            </button>
+        </section>
+
+        <!-- فوتر -->
+        <footer class="text-center py-8 text-rose-500">
+            <p>ساخته شده با عشق، فقط برای تو ❤️</p>
+        </footer>
+
+    </div>
+
+    <!-- پخش کننده موسیقی -->
+    <audio id="background-music" src="Cheshmami.mp3" loop></audio>
+
+    <script>
+        // لیست دلایل دوست داشتن
+        const reasons = [
+            "1. کصخلتم عجیب، سلامتیت الکل صنعتی",
+            "2. چون بهترین مشاور دنیایی، حتی وقتی خودم نمی‌دونم چی می‌خوام.",
+            "3. برای اون لحظه‌هایی که با یه نگاه حرف دلمو می‌فهمی.",
+            "4. واسه اینکه کنار تو زمان بی‌معنی می‌شه.",
+            "5. چون خنده‌هات قشنگ‌ترین موسیقی متن زندگی منه.",
+            "6. برای اینکه بهم یاد دادی چطور قوی باشم.",
+            "7. واسه همه دیوونه‌بازی‌هایی که فقط با تو می‌چسبه.",
+            "8. چون با تو می‌تونم ساعت‌ها در مورد هر چیزی حرف بزنم.",
+            "9. برای اون آرامشی که صدات بهم می‌ده.",
+            "10. واسه اینکه همیشه باعث می‌شی به خودم باور داشته باشم.",
+            "11. چون تو تنها کسی هستی که می‌تونه منو از ته دل بخندونه.",
+            "12. برای صبری که در مقابل بدقلقی‌هام داری.",
+            "13. واسه اینکه هر روز یه چیز جدید ازت یاد می‌گیرم.",
+            "14. چون آغوشت امن‌ترین نقطه‌ی این جهانه.",
+            "15. برای اینکه حتی وقتی ناراحتم، بودنت همه چیزو بهتر می‌کنه.",
+            "16. واسه اینکه به رویاهام احترام می‌ذاری و تشویقم می‌کنی.",
+            "17. چون سلیقه‌ت تو فیلم و موسیقی بی‌نظیره.",
+            "18. برای اون مهربونی بی‌پایانی که تو قلبت داری.",
+            "19. واسه اینکه کنار تو، آینده روشن‌تر به نظر میاد.",
+            "20. چون تو همون نیمه‌ی گمشده‌ای هستی که هیچوقت فکر نمی‌کردم پیدا بشه.",
+            "21. برای اینکه بودنت، بهترین اتفاق زندگی منه.",
+            "22. چون وقتی حواسم نیست، یواشکی نگام می‌کنی.",
+            "23. برای اینکه با تو بودن، بهترین فرار از دنیای واقعیه.",
+            "24. واسه اینکه بلدی چطور یه روز بد رو به یه روز خوب تبدیل کنی.",
+            "25. چون حتی سکوتمون کنار هم پر از حرفه.",
+            "26. برای اینکه مثل یه کتاب خوبی که هیچوقت از خوندنش سیر نمی‌شم.",
+            "27. واسه اینکه همیشه بوی عطرت رو لباسام جا می‌مونه.",
+            "28. چون تو تنها کسی هستی که می‌دونه چطور آرومم کنه.",
+            "29. برای همه آهنگایی که با هم گوش دادیم و شدن خاطره.",
+            "30. واسه اینکه تو شلوغیای ذهنم، تو نقطه‌ی آرامش منی.",
+            "31. چون بلدی با یه جمله ساده، کل روزمو بسازی.",
+            "32. برای اینکه کنار تو، از هیچ چیز نمی‌ترسم.",
+            "33. واسه اون شوخیای بی‌مزه‌ای که فقط ما دوتا بهشون می‌خندیم.",
+            "34. چون تو هر شرایطی، اولویت اولت منم.",
+            "35. برای اینکه به جزئیات کوچیک اهمیت می‌دی.",
+            "36. واسه اینکه دستات وقتی تو دستامه، حس می‌کنم کل دنیا رو دارم.",
+            "37. چون طرز فکرت و نگاهت به دنیا رو دوست دارم.",
+            "38. برای اینکه همیشه بهترین ورژن خودت رو بهم نشون می‌دی.",
+            "39. واسه اینکه با تو، قهوه خوردن هم یه ماجراجوییه.",
+            "40. چون تو تنها کسی هستی که می‌تونه اشکمو به لبخند تبدیل کنه.",
+            "41. برای اینکه به من اعتماد به نفس می‌دی.",
+            "42. واسه اینکه هر خاطره‌ای با تو، یه گنج واقعیه.",
+            "43. چون تو سخت‌ترین روزا، امید منی.",
+            "44. برای اینکه دنیام بدون تو، یه چیزی کم داره.",
+            "45. واسه اینکه با تو، هر روز یه فرصت جدیده برای عاشقی.",
+            "46. چون تو، خودِ خودِ عشقی."
+        ];
+
+        const reasonDisplay = document.getElementById('reason-display');
+        const reasonButton = document.getElementById('reason-button');
+        let currentReasonIndex = -1; // از -1 شروع می‌شود تا با اولین کلیک به 0 برسد
+
+        reasonButton.addEventListener('click', () => {
+            // ایندکس را یکی اضافه می‌کند
+            currentReasonIndex++;
+
+            // اگر به انتهای لیست رسید، دوباره به اول برمی‌گردد
+            if (currentReasonIndex >= reasons.length) {
+                currentReasonIndex = 0;
+            }
+            
+            const reason = reasons[currentReasonIndex];
+            
+            // افکت محو شدن برای نمایش متن جدید
+            reasonDisplay.style.opacity = 0;
+            setTimeout(() => {
+                reasonDisplay.textContent = reason;
+                reasonDisplay.style.opacity = 1;
+            }, 300);
+        });
+
+        // کد مربوط به پخش موسیقی
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const audio = document.getElementById('background-music');
+            audio.volume = 0.5; // می‌توانید بلندی صدا را از 0.0 تا 1.0 تنظیم کنید
+
+            let playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    // اگر پخش خودکار توسط مرورگر بلاک شد
+                    console.log("پخش خودکار ممکن نیست. منتظر تعامل کاربر...");
+                    
+                    // یک دکمه برای پخش دستی ایجاد می‌کنیم
+                    const playButton = document.createElement('button');
+                    playButton.textContent = '🎶 پخش موسیقی  ';
+                    
+                    // استایل دکمه
+                    playButton.style.position = 'fixed';
+                    playButton.style.bottom = '20px';
+                    playButton.style.left = '50%';
+                    playButton.style.transform = 'translateX(-50%)';
+                    playButton.style.padding = '12px 24px';
+                    playButton.style.backgroundColor = '#db2777'; // رنگ صورتی
+                    playButton.style.color = 'white';
+                    playButton.style.border = 'none';
+                    playButton.style.borderRadius = '30px';
+                    playButton.style.cursor = 'pointer';
+                    playButton.style.zIndex = '1000';
+                    playButton.style.fontSize = '16px';
+                    playButton.style.boxShadow = '0 4px 14px 0 rgba(0,0,0,0.1)';
+                    playButton.style.transition = 'all 0.2s ease';
+
+                    document.body.appendChild(playButton);
+
+                    playButton.addEventListener('click', () => {
+                        audio.play();
+                        playButton.style.display = 'none'; // دکمه پس از کلیک مخفی می‌شود
+                    });
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
+ 
