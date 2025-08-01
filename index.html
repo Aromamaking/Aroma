@@ -679,36 +679,33 @@
                     <div class="certificate-new p-8 max-w-4xl mx-auto animate-fade-in text-white">
                         <div class="certificate-new-bg"></div>
                         <div class="certificate-border"></div>
-                        <div class="relative z-10 flex flex-col md:flex-row gap-8">
-                            <div class="md:w-2/3 text-right space-y-4">
-                                <div class="text-center md:text-right">
-                                    <h2 class="font-cinzel text-3xl text-yellow-400 tracking-widest">CERTIFICATE</h2>
-                                    <p class="font-cinzel text-lg text-gray-200">OF SCENT AUTHENTICITY</p>
-                                </div>
-                                <div class="border-t border-yellow-400 opacity-50 my-4"></div>
-                                <p class="text-lg">این شناسنامه برای رایحه خلق شده با نام</p>
-                                <h3 class="text-4xl font-bold text-yellow-300 text-center py-2">${journeyState.perfumeName}</h3>
-                                <p class="text-lg">صادر گردیده است.</p>
-                                <div class="space-y-2 pt-4">
-                                    <p><strong class="text-yellow-400">آرکتایپ رایحه:</strong> ${hybridTitle}</p>
-                                    <p><strong class="text-yellow-400">نت‌های اصلی:</strong> ${allNotes.join('، ')}</p>
-                                </div>
-                                <div class="pt-6 flex justify-between items-end">
-                                    <div>
-                                        <p class="font-cinzel text-sm">AROMA MASTER PERFUMER</p>
-                                        <p class="text-xs text-gray-400">عطرساز ارشد آروما</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm">${issueDate}</p>
-                                        <p class="text-xs text-gray-400">تاریخ صدور</p>
-                                    </div>
-                                </div>
+                        <div class="relative z-10">
+                            <div class="text-center">
+                                <h2 class="font-cinzel text-3xl text-yellow-400 tracking-widest">CERTIFICATE</h2>
+                                <p class="font-cinzel text-lg text-gray-200">OF SCENT AUTHENTICITY</p>
                             </div>
-                            <div class="md:w-1/3 flex flex-col items-center justify-between">
-                                <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/logo.png" alt="آروما لوگو" class="h-20">
-                                <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/AromaC.png" alt="مهر اصالت" class="w-40 h-40">
+                            <div class="border-t border-yellow-400 opacity-50 my-6"></div>
+                            <div class="text-center space-y-2">
+                                <p class="text-lg">این شناسنامه برای رایحه خلق شده با نام</p>
+                                <h3 class="text-4xl font-bold text-yellow-300 py-2">${journeyState.perfumeName}</h3>
+                                <p class="text-lg">صادر گردیده است.</p>
+                            </div>
+                            <div class="text-right space-y-2 pt-6 mt-6 border-t border-emerald-700">
+                                <p><strong class="text-yellow-400">آرکتایپ رایحه:</strong> ${hybridTitle}</p>
+                                <p><strong class="text-yellow-400">نت‌های اصلی:</strong> ${allNotes.join('، ')}</p>
+                            </div>
+                            <div class="pt-8 mt-8 flex justify-between items-end border-t border-emerald-700">
+                                <div>
+                                    <p class="font-cinzel text-sm">AROMA MASTER PERFUMER</p>
+                                    <p class="text-xs text-gray-400">عطرساز ارشد آروما</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm">${issueDate}</p>
+                                    <p class="text-xs text-gray-400">تاریخ صدور</p>
+                                </div>
                             </div>
                         </div>
+                        <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/AromaC.jpg" alt="مهر اصالت" class="absolute bottom-6 left-6 w-32 h-32 opacity-90">
                     </div>
                 `;
             }
