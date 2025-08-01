@@ -3,229 +3,506 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>یک نامه عاشقانه برای تو</title>
-    <!-- استفاده از Tailwind CSS برای استایل‌دهی -->
+    <title>آروما - هویت بویایی خود را کشف کنید</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- فونت‌های گوگل -->
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
     <style>
-        /* استایل‌های سفارشی */
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background-color: #fdf2f8; /* صورتی خیلی روشن */
+            background-color: #022c22; /* Emerald Green 950 */
+            color: #F3F4F6; /* Light gray text */
         }
-        .font-lalezar {
-            font-family: 'Lalezar', cursive;
+        .font-vazir {
+            font-family: 'Vazirmatn', sans-serif;
         }
-        /* انیمیشن برای قلب */
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
+        .hero-bg {
+            background-image: linear-gradient(to bottom, rgba(2, 44, 34, 0.8), rgba(2, 44, 34, 1)), url('https://images.unsplash.com/photo-1585399001829-d84c6d75b858?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
         }
-        .heart-pulse {
-            animation: pulse 2s infinite;
+        .btn-primary {
+            background-color: #D4AF37; /* Gold color */
+            color: #022c22; /* Dark Emerald for text */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
         }
-        /* انیمیشن محو شدن به داخل */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .btn-primary:hover {
+            background-color: #EACD65;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
         }
-        .fade-in {
-            animation: fadeIn 1s ease-out forwards;
+        .card {
+            background-color: #064e3b; /* Emerald Green 900 */
+            border: 1px solid #065f46; /* Emerald Green 800 */
         }
-        /* برای تاخیر در انیمیشن‌ها */
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #064e3b; /* Emerald 900 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #EACD65;
+        }
     </style>
 </head>
-<body class="bg-rose-50 text-gray-700">
+<body class="font-vazir">
 
-    <div class="container mx-auto p-4 md:p-8 max-w-4xl">
-        
-        <!-- بخش هدر -->
-        <header class="text-center py-12">
-            <div class="inline-block heart-pulse mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-red-500" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                </svg>
-            </div>
-            <h1 class="font-lalezar text-4xl md:text-6xl text-rose-800 fade-in">برای تنها عشق زندگیم</h1>
-            <p class="mt-4 text-xl text-rose-600 fade-in delay-1">این صفحه تقدیم به تو، متینه عزیزم</p>
-        </header>
-
-        <!-- بخش پیام اصلی -->
-        <main class="bg-white rounded-2xl shadow-lg p-6 md:p-10 my-8 fade-in delay-2">
-            <h2 class="font-lalezar text-2xl text-rose-700 mb-4">پیامی از قلبم</h2>
-            <p class="text-base md:text-lg leading-relaxed">
-                هر روز که با تو می‌گذرد، بیشتر از قبل به این حقیقت پی می‌برم که خوشبختی واقعی در کنار تو بودن است. تو نه تنها عشق من، بلکه بهترین دوست، همراه و بزرگترین انگیزه‌ی من برای پیشرفت هستی. لبخند تو، زیباترین منظره‌ای است که تا به حال دیده‌ام و صدای تو، آرامش‌بخش‌ترین موسیقی دنیاست. ممنونم که هستی و دنیای من را زیباتر می‌کنی.
-            </p>
-        </main>
-
-        <!-- گالری خاطرات -->
-        <section class="my-12 fade-in delay-3">
-            <h2 class="font-lalezar text-center text-3xl text-rose-800 mb-8">گوشه‌ای از خاطرات شیرین ما</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <!-- عکس اول: آدرس به فایل داخل فولدر matine.jpg اشاره می‌کند -->
-                <div class="transform hover:scale-105 transition-transform duration-300">
-                    <img src="matine.jpg/photo20022510520.jpg" alt="تصویر خاطره اول" class="rounded-xl shadow-md w-full h-full object-cover">
-                </div>
-                <!-- عکس دوم: آدرس به فایل داخل فولدر matine.jpg اشاره می‌کند -->
-                <div class="transform hover:scale-105 transition-transform duration-300">
-                    <img src="matine.jpg/photo20022510561.jpg" alt="تصویر خاطره دوم" class="rounded-xl shadow-md w-full h-full object-cover">
-                </div>
-                <!-- عکس سوم: آدرس به فایل داخل فولدر matine.jpg اشاره می‌کند -->
-                <div class="transform hover:scale-105 transition-transform duration-300">
-                    <img src="matine.jpg/photo20022510686.jpg" alt="تصویر خاطره سوم" class="rounded-xl shadow-md w-full h-full object-cover">
-                </div>
-            </div>
-        </section>
-
-        <!-- بخش دلایل دوست داشتن -->
-        <section class="bg-white rounded-2xl shadow-lg p-6 md:p-10 my-8 text-center fade-in delay-4">
-            <h2 class="font-lalezar text-2xl text-rose-700 mb-4">چند دلیل (از بی‌نهایت) که چرا دوستت دارم...</h2>
-            <div id="reason-display" class="min-h-[6rem] flex items-center justify-center p-4 my-4 bg-rose-100 rounded-lg text-rose-800 text-lg font-semibold transition-all duration-300">
-                برای دیدن یک دلیل جدید، روی دکمه کلیک کن!
-            </div>
-            <button id="reason-button" class="bg-red-500 text-white font-bold py-3 px-8 rounded-full hover:bg-red-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
-                یک دلیل دیگر به من بگو!
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-emerald-950 bg-opacity-80 backdrop-blur-sm shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-white tracking-wider">آروما</h1>
+            <nav class="hidden md:flex space-x-8 space-x-reverse text-lg">
+                <a href="#how-it-works" class="text-gray-300 hover:text-white transition">چگونه کار می‌کند؟</a>
+                <a href="#philosophy" class="text-gray-300 hover:text-white transition">فلسفه ما</a>
+                <a href="#kits" class="text-gray-300 hover:text-white transition">کیت‌ها</a>
+            </nav>
+            <button id="startQuizBtnHeader" class="btn-primary font-bold py-2 px-6 rounded-lg text-lg">
+                شروع آزمون
             </button>
-        </section>
+        </div>
+    </header>
 
-        <!-- فوتر -->
-        <footer class="text-center py-8 text-rose-500">
-            <p>ساخته شده با عشق، فقط برای تو ❤️</p>
-        </footer>
+    <!-- Hero Section -->
+    <main id="home" class="hero-bg pt-32 pb-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-4">
+                آرکتایپ رایحه خود را کشف کنید
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                با یک آزمون روانشناسی معتبر، عطری را بیابید که بازتابی از عمیق‌ترین لایه‌های شخصیت شماست.
+            </p>
+            <button id="startQuizBtnHero" class="btn-primary font-bold py-4 px-10 rounded-lg text-xl">
+                آزمون کشف آرکتایپ
+            </button>
+        </div>
+    </main>
 
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-emerald-950">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">سفر شما در دنیای آروما</h3>
+            <div class="grid md:grid-cols-3 gap-10 text-center">
+                <div class="card p-8 rounded-xl transform hover:scale-105 transition-transform duration-300">
+                    <div class="flex justify-center mb-4"><div class="bg-emerald-800 p-4 rounded-full"><svg class="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg></div></div>
+                    <h4 class="text-2xl font-bold mb-2 text-white">۱. تحلیل شخصیت</h4>
+                    <p class="text-gray-300">به سوالات تصویری و موقعیتی ما پاسخ دهید تا آرکتایپ شخصیتی شما را تحلیل کنیم.</p>
+                </div>
+                <div class="card p-8 rounded-xl transform hover:scale-105 transition-transform duration-300">
+                     <div class="flex justify-center mb-4"><div class="bg-emerald-800 p-4 rounded-full"><svg class="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg></div></div>
+                    <h4 class="text-2xl font-bold mb-2 text-white">۲. دریافت کیت</h4>
+                    <p class="text-gray-300">هوش مصنوعی ما یک «کیت کشف» حاوی رایحه‌های متناسب با آرکتایپ شما را پیشنهاد می‌دهد.</p>
+                </div>
+                <div class="card p-8 rounded-xl transform hover:scale-105 transition-transform duration-300">
+                     <div class="flex justify-center mb-4"><div class="bg-emerald-800 p-4 rounded-full"><svg class="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div></div>
+                    <h4 class="text-2xl font-bold mb-2 text-white">۳. کشف هویت بویایی</h4>
+                    <p class="text-gray-300">رایحه‌ها را امتحان کرده و عطر امضای خود را برای خرید بطری کامل انتخاب نمایید.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy" class="py-20">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
+            <div class="md:w-1/2">
+                <img src="https://images.unsplash.com/photo-1620916566398-39f168a27e20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="فلسفه آروما - عطرسازی هنرمندانه" class="rounded-xl shadow-lg w-full">
+            </div>
+            <div class="md:w-1/2">
+                <h3 class="text-3xl font-bold mb-4 text-white">رایحه، آینه‌ی شخصیت</h3>
+                <p class="text-lg text-gray-300 mb-4 leading-relaxed">
+                    ما در آروما باور داریم که انتخاب عطر، یک تصمیم عمیقاً شخصی است. حس بویایی به طور مستقیم با حافظه و احساسات ما در ارتباط است. به همین دلیل، ما از روانشناسی و هوش مصنوعی بهره می‌بریم تا پلی میان شخصیت درونی شما و دنیای پیچیده‌ی رایحه‌ها بسازیم.
+                </p>
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    هدف ما فراتر از فروش عطر است؛ ما به شما کمک می‌کنیم تا بخشی از هویت خود را که تا کنون پنهان مانده بود، کشف کنید.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Kits Section -->
+    <section id="kits" class="py-20 bg-emerald-950">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">کیت‌های کشف بر اساس آرکتایپ</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Kit 1 -->
+                <div class="card rounded-xl overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1617195822398-71329a36b176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="کیت حاکم" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-white mb-2">کیت حاکم</h4>
+                        <p class="text-gray-300">رایحه‌های چوبی و چرمی برای شخصیتی قدرتمند و با اعتماد به نفس.</p>
+                    </div>
+                </div>
+                <!-- Kit 2 -->
+                <div class="card rounded-xl overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1598202092283-75b9f151a65d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="کیت عاشق" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-white mb-2">کیت عاشق</h4>
+                        <p class="text-gray-300">عطرهای گلی و شیرین برای روحیه‌ای لطیف، صمیمی و سرشار از احساس.</p>
+                    </div>
+                </div>
+                <!-- Kit 3 -->
+                <div class="card rounded-xl overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1600950335862-34998a432471?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="کیت جستجوگر" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-white mb-2">کیت جستجوگر</h4>
+                        <p class="text-gray-300">نت‌های مرکباتی و تازه برای شخصیتی پویا، نوآور و عاشق تجربه.</p>
+                    </div>
+                </div>
+                <!-- Kit 4 -->
+                <div class="card rounded-xl overflow-hidden group">
+                    <img src="https://images.unsplash.com/photo-1594035918253-8a3a0b3bb875?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="کیت خالق" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-bold text-white mb-2">کیت خالق</h4>
+                        <p class="text-gray-300">رایحه‌های غیرمعمول و هنری برای روحیه‌ای ساختارشکن و منحصربه‌فرد.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-950 py-10">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p>&copy; 1403 (2024) | تمامی حقوق برای برند آروما محفوظ است.</p>
+            <p class="mt-2">طراحی شده برای کشف بهترین نسخه از شما.</p>
+        </div>
+    </footer>
+
+    <!-- Quiz Modal -->
+    <div id="quizModal" class="fixed inset-0 z-50 items-center justify-center modal-backdrop hidden">
+        <div id="quizContainer" class="card rounded-2xl shadow-2xl w-11/12 md:w-3/4 lg:w-2/3 max-w-5xl max-h-[90vh] flex flex-col transform transition-all duration-300 scale-95 opacity-0">
+            <div class="p-4 border-b border-emerald-800 flex justify-between items-center">
+                <h3 class="text-2xl font-bold text-white">آزمون کشف آرکتایپ رایحه</h3>
+                <button id="closeQuizBtn" class="text-gray-300 hover:text-white text-3xl">&times;</button>
+            </div>
+            <div id="quizContent" class="p-6 md:p-8 overflow-y-auto">
+                <!-- Quiz steps will be injected here by JavaScript -->
+            </div>
+            <div class="p-4 border-t border-emerald-800 flex justify-between items-center">
+                <button id="prevBtn" class="bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-emerald-600 transition disabled:opacity-50 disabled:cursor-not-allowed">قبلی</button>
+                <div id="stepIndicator" class="text-gray-400"></div>
+                <button id="nextBtn" class="btn-primary font-bold py-2 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">بعدی</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Results Modal -->
+    <div id="resultsModal" class="fixed inset-0 z-50 items-center justify-center modal-backdrop hidden">
+        <div id="resultsContainer" class="card rounded-2xl shadow-2xl w-11/12 md:w-2/3 lg:w-1/2 max-w-4xl max-h-[90vh] flex flex-col transform transition-all duration-300 scale-95 opacity-0">
+            <div class="p-4 border-b border-emerald-800 flex justify-between items-center">
+                <h3 class="text-2xl font-bold text-white">تحلیل شخصیت بویایی شما</h3>
+                <button id="closeResultsBtn" class="text-gray-300 hover:text-white text-3xl">&times;</button>
+            </div>
+            <div id="resultsContent" class="p-6 md:p-8 overflow-y-auto text-center">
+                <!-- Results will be injected here by JavaScript -->
+            </div>
+             <div class="p-4 border-t border-emerald-800 text-center">
+                <button id="restartQuizBtn" class="bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-emerald-600 transition">انجام دوباره آزمون</button>
+            </div>
+        </div>
     </div>
 
-    <!-- پخش کننده موسیقی -->
-    <audio id="background-music" src="Cheshmami.mp3" loop></audio>
 
     <script>
-        // لیست دلایل دوست داشتن
-        const reasons = [
-            "1. کصخلتم عجیب، سلامتیت الکل صنعتی",
-            "2. چون بهترین مشاور دنیایی، حتی وقتی خودم نمی‌دونم چی می‌خوام.",
-            "3. برای اون لحظه‌هایی که با یه نگاه حرف دلمو می‌فهمی.",
-            "4. واسه اینکه کنار تو زمان بی‌معنی می‌شه.",
-            "5. چون خنده‌هات قشنگ‌ترین موسیقی متن زندگی منه.",
-            "6. برای اینکه بهم یاد دادی چطور قوی باشم.",
-            "7. واسه همه دیوونه‌بازی‌هایی که فقط با تو می‌چسبه.",
-            "8. چون با تو می‌تونم ساعت‌ها در مورد هر چیزی حرف بزنم.",
-            "9. برای اون آرامشی که صدات بهم می‌ده.",
-            "10. واسه اینکه همیشه باعث می‌شی به خودم باور داشته باشم.",
-            "11. چون تو تنها کسی هستی که می‌تونه منو از ته دل بخندونه.",
-            "12. برای صبری که در مقابل بدقلقی‌هام داری.",
-            "13. واسه اینکه هر روز یه چیز جدید ازت یاد می‌گیرم.",
-            "14. چون آغوشت امن‌ترین نقطه‌ی این جهانه.",
-            "15. برای اینکه حتی وقتی ناراحتم، بودنت همه چیزو بهتر می‌کنه.",
-            "16. واسه اینکه به رویاهام احترام می‌ذاری و تشویقم می‌کنی.",
-            "17. چون سلیقه‌ت تو فیلم و موسیقی بی‌نظیره.",
-            "18. برای اون مهربونی بی‌پایانی که تو قلبت داری.",
-            "19. واسه اینکه کنار تو، آینده روشن‌تر به نظر میاد.",
-            "20. چون تو همون نیمه‌ی گمشده‌ای هستی که هیچوقت فکر نمی‌کردم پیدا بشه.",
-            "21. برای اینکه بودنت، بهترین اتفاق زندگی منه.",
-            "22. چون وقتی حواسم نیست، یواشکی نگام می‌کنی.",
-            "23. برای اینکه با تو بودن، بهترین فرار از دنیای واقعیه.",
-            "24. واسه اینکه بلدی چطور یه روز بد رو به یه روز خوب تبدیل کنی.",
-            "25. چون حتی سکوتمون کنار هم پر از حرفه.",
-            "26. برای اینکه مثل یه کتاب خوبی که هیچوقت از خوندنش سیر نمی‌شم.",
-            "27. واسه اینکه همیشه بوی عطرت رو لباسام جا می‌مونه.",
-            "28. چون تو تنها کسی هستی که می‌دونه چطور آرومم کنه.",
-            "29. برای همه آهنگایی که با هم گوش دادیم و شدن خاطره.",
-            "30. واسه اینکه تو شلوغیای ذهنم، تو نقطه‌ی آرامش منی.",
-            "31. چون بلدی با یه جمله ساده، کل روزمو بسازی.",
-            "32. برای اینکه کنار تو، از هیچ چیز نمی‌ترسم.",
-            "33. واسه اون شوخیای بی‌مزه‌ای که فقط ما دوتا بهشون می‌خندیم.",
-            "34. چون تو هر شرایطی، اولویت اولت منم.",
-            "35. برای اینکه به جزئیات کوچیک اهمیت می‌دی.",
-            "36. واسه اینکه دستات وقتی تو دستامه، حس می‌کنم کل دنیا رو دارم.",
-            "37. چون طرز فکرت و نگاهت به دنیا رو دوست دارم.",
-            "38. برای اینکه همیشه بهترین ورژن خودت رو بهم نشون می‌دی.",
-            "39. واسه اینکه با تو، قهوه خوردن هم یه ماجراجوییه.",
-            "40. چون تو تنها کسی هستی که می‌تونه اشکمو به لبخند تبدیل کنه.",
-            "41. برای اینکه به من اعتماد به نفس می‌دی.",
-            "42. واسه اینکه هر خاطره‌ای با تو، یه گنج واقعیه.",
-            "43. چون تو سخت‌ترین روزا، امید منی.",
-            "44. برای اینکه دنیام بدون تو، یه چیزی کم داره.",
-            "45. واسه اینکه با تو، هر روز یه فرصت جدیده برای عاشقی.",
-            "46. چون تو، خودِ خودِ عشقی."
-        ];
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Modal Handling ---
+            const quizModal = document.getElementById('quizModal');
+            const quizContainer = document.getElementById('quizContainer');
+            const resultsModal = document.getElementById('resultsModal');
+            const resultsContainer = document.getElementById('resultsContainer');
 
-        const reasonDisplay = document.getElementById('reason-display');
-        const reasonButton = document.getElementById('reason-button');
-        let currentReasonIndex = -1; // از -1 شروع می‌شود تا با اولین کلیک به 0 برسد
+            const openQuizModal = () => {
+                quizModal.classList.remove('hidden');
+                quizModal.classList.add('flex');
+                setTimeout(() => {
+                    quizContainer.classList.remove('scale-95', 'opacity-0');
+                }, 10);
+                renderStep();
+            };
 
-        reasonButton.addEventListener('click', () => {
-            // ایندکس را یکی اضافه می‌کند
-            currentReasonIndex++;
-
-            // اگر به انتهای لیست رسید، دوباره به اول برمی‌گردد
-            if (currentReasonIndex >= reasons.length) {
-                currentReasonIndex = 0;
-            }
+            const closeQuizModal = () => {
+                quizContainer.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    quizModal.classList.add('hidden');
+                    quizModal.classList.remove('flex');
+                    resetQuiz();
+                }, 300);
+            };
             
-            const reason = reasons[currentReasonIndex];
+            const openResultsModal = () => {
+                resultsModal.classList.remove('hidden');
+                resultsModal.classList.add('flex');
+                setTimeout(() => {
+                    resultsContainer.classList.remove('scale-95', 'opacity-0');
+                }, 10);
+            };
+
+            const closeResultsModal = () => {
+                resultsContainer.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    resultsModal.classList.add('hidden');
+                    resultsModal.classList.remove('flex');
+                }, 300);
+            };
+
+            document.getElementById('startQuizBtnHeader').addEventListener('click', openQuizModal);
+            document.getElementById('startQuizBtnHero').addEventListener('click', openQuizModal);
+            document.getElementById('closeQuizBtn').addEventListener('click', closeQuizModal);
+            document.getElementById('closeResultsBtn').addEventListener('click', closeResultsModal);
             
-            // افکت محو شدن برای نمایش متن جدید
-            reasonDisplay.style.opacity = 0;
-            setTimeout(() => {
-                reasonDisplay.textContent = reason;
-                reasonDisplay.style.opacity = 1;
-            }, 300);
-        });
+            document.getElementById('restartQuizBtn').addEventListener('click', () => {
+                closeResultsModal();
+                setTimeout(openQuizModal, 350);
+            });
 
-        // کد مربوط به پخش موسیقی
-        window.addEventListener('DOMContentLoaded', (event) => {
-            const audio = document.getElementById('background-music');
-            audio.volume = 0.5; // می‌توانید بلندی صدا را از 0.0 تا 1.0 تنظیم کنید
+            // --- Quiz Logic ---
+            const quizContent = document.getElementById('quizContent');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const stepIndicator = document.getElementById('stepIndicator');
 
-            let playPromise = audio.play();
+            const questions = [
+                {
+                    type: 'visual',
+                    question: "کدام یک از این فضاها بیشتر به شما حس تعلق می‌دهد؟",
+                    options: [
+                        { image: 'https://images.unsplash.com/photo-1489599849927-2e91e658fff7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', value: 'lover', alt: 'جشن شلوغ و پرنور' },
+                        { image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', value: 'ruler', alt: 'کتابخانه ساکت و کلاسیک' },
+                        { image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', value: 'creator', alt: 'گالری هنری مینیمال' },
+                        { image: 'https://images.unsplash.com/photo-1473187983305-f615314294a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', value: 'explorer', alt: 'ساحل بکر و دست نخورده' }
+                    ]
+                },
+                {
+                    type: 'text',
+                    question: "یک آخر هفته کاملاً آزاد دارید. ترجیح شما چیست؟",
+                    options: [
+                        { text: "برنامه‌ریزی برای یک سفر کوتاه و کشف یک مکان جدید.", value: "explorer" },
+                        { text: "دعوت از دوستان نزدیک برای یک مهمانی شام صمیمی در خانه.", value: "lover" },
+                        { text: "کار کردن روی یک پروژه شخصی خلاقانه که مدت‌هاست ذهن شما را درگیر کرده.", value: "creator" },
+                        { text: "شرکت در یک کنفرانس یا کارگاه برای پیشرفت شغلی و شبکه‌سازی.", value: "ruler" }
+                    ]
+                },
+                {
+                    type: 'text',
+                    question: "کدام کلمه برای شما مهم‌تر است؟",
+                    options: [
+                        { text: "موفقیت", value: "ruler" },
+                        { text: "اشتیاق", value: "lover" },
+                        { text: "آزادی", value: "explorer" },
+                        { text: "اصالت", value: "creator" }
+                    ]
+                },
+                 {
+                    type: 'text',
+                    question: "وقتی با یک چالش بزرگ روبرو می‌شوید، اولین واکنش شما چیست؟",
+                    options: [
+                        { text: "کنترل اوضاع را به دست می‌گیرم و یک استراتژی برای حل آن طراحی می‌کنم.", value: "ruler" },
+                        { text: "به دنبال یک راه حل خلاقانه و خارج از چارچوب می‌گردم.", value: "creator" },
+                        { text: "با افراد مورد اعتمادم مشورت می‌کنم و از حمایت آن‌ها استفاده می‌کنم.", value: "lover" },
+                        { text: "آن را به عنوان یک ماجراجویی جدید می‌بینم و با آغوش باز به استقبالش می‌روم.", value: "explorer" }
+                    ]
+                }
+            ];
 
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    // اگر پخش خودکار توسط مرورگر بلاک شد
-                    console.log("پخش خودکار ممکن نیست. منتظر تعامل کاربر...");
-                    
-                    // یک دکمه برای پخش دستی ایجاد می‌کنیم
-                    const playButton = document.createElement('button');
-                    playButton.textContent = '🎶 پخش موسیقی  ';
-                    
-                    // استایل دکمه
-                    playButton.style.position = 'fixed';
-                    playButton.style.bottom = '20px';
-                    playButton.style.left = '50%';
-                    playButton.style.transform = 'translateX(-50%)';
-                    playButton.style.padding = '12px 24px';
-                    playButton.style.backgroundColor = '#db2777'; // رنگ صورتی
-                    playButton.style.color = 'white';
-                    playButton.style.border = 'none';
-                    playButton.style.borderRadius = '30px';
-                    playButton.style.cursor = 'pointer';
-                    playButton.style.zIndex = '1000';
-                    playButton.style.fontSize = '16px';
-                    playButton.style.boxShadow = '0 4px 14px 0 rgba(0,0,0,0.1)';
-                    playButton.style.transition = 'all 0.2s ease';
+            let currentStep = 0;
+            let answers = {};
 
-                    document.body.appendChild(playButton);
+            const renderStep = () => {
+                const stepData = questions[currentStep];
+                let contentHtml = '';
 
-                    playButton.addEventListener('click', () => {
-                        audio.play();
-                        playButton.style.display = 'none'; // دکمه پس از کلیک مخفی می‌شود
+                if (stepData.type === 'visual') {
+                    const optionsHtml = stepData.options.map((opt, index) => `
+                        <div class="cursor-pointer visual-option rounded-lg overflow-hidden ${answers[currentStep] === opt.value ? 'selected' : ''}" data-value="${opt.value}">
+                            <img src="${opt.image}" alt="${opt.alt}" class="w-full h-40 md:h-48 object-cover">
+                        </div>
+                    `).join('');
+                    contentHtml = `<div class="grid grid-cols-2 md:grid-cols-4 gap-4">${optionsHtml}</div>`;
+                } else { // type 'text'
+                    const optionsHtml = stepData.options.map((opt, index) => `
+                        <label class="block card p-4 rounded-lg cursor-pointer hover:bg-emerald-800 transition border-2 ${answers[currentStep] === opt.value ? 'border-yellow-400' : 'border-transparent'}">
+                            <input type="radio" name="q${currentStep}" value="${opt.value}" class="hidden" ${answers[currentStep] === opt.value ? 'checked' : ''}>
+                            <span class="text-lg">${opt.text}</span>
+                        </label>
+                    `).join('');
+                    contentHtml = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">${optionsHtml}</div>`;
+                }
+                
+                quizContent.innerHTML = `
+                    <h4 class="text-2xl font-bold mb-6 text-center text-white">${stepData.question}</h4>
+                    ${contentHtml}
+                `;
+                
+                // Add event listeners
+                if (stepData.type === 'visual') {
+                    document.querySelectorAll('.visual-option').forEach(el => {
+                        el.addEventListener('click', (e) => {
+                            answers[currentStep] = e.currentTarget.dataset.value;
+                            renderStep();
+                        });
+                    });
+                } else {
+                    document.querySelectorAll(`input[name="q${currentStep}"]`).forEach(radio => {
+                        radio.addEventListener('change', (e) => {
+                            answers[currentStep] = e.target.value;
+                            renderStep();
+                        });
+                    });
+                }
+                
+                updateButtons();
+            };
+            
+            const updateButtons = () => {
+                stepIndicator.textContent = `مرحله ${currentStep + 1} از ${questions.length}`;
+                prevBtn.disabled = currentStep === 0;
+                
+                if (answers[currentStep] !== undefined) {
+                    nextBtn.disabled = false;
+                    nextBtn.classList.remove('disabled:opacity-50', 'disabled:cursor-not-allowed');
+                } else {
+                    nextBtn.disabled = true;
+                    nextBtn.classList.add('disabled:opacity-50', 'disabled:cursor-not-allowed');
+                }
+
+                if (currentStep === questions.length - 1) {
+                    nextBtn.textContent = 'مشاهده تحلیل';
+                } else {
+                    nextBtn.textContent = 'بعدی';
+                }
+            };
+
+            nextBtn.addEventListener('click', () => {
+                if (nextBtn.disabled) return;
+                if (currentStep < questions.length - 1) {
+                    currentStep++;
+                    renderStep();
+                } else {
+                    calculateResults();
+                    closeQuizModal();
+                    setTimeout(openResultsModal, 350);
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    currentStep--;
+                    renderStep();
+                }
+            });
+            
+            const resetQuiz = () => {
+                currentStep = 0;
+                answers = {};
+            };
+
+            const calculateResults = () => {
+                const scores = { ruler: 0, creator: 0, lover: 0, explorer: 0 };
+                for(const step in answers) {
+                    scores[answers[step]]++;
+                }
+                const dominantArchetype = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+                displayResults(dominantArchetype);
+            };
+            
+            const displayResults = (archetype) => {
+                const resultsData = {
+                    ruler: {
+                        title: "آرکتایپ حاکم",
+                        explanation: "انتخاب شما برای فضاهای کلاسیک و تمرکزتان بر موفقیت و استراتژی، نشان‌دهنده شخصیتی قدرتمند، منظم و با اعتماد به نفس است. شما به کیفیت، کنترل و ساختارهای پایدار اهمیت می‌دهید.",
+                        fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که حس قدرت و وقار را منتقل می‌کنند. نت‌های سنگین، چوبی، چرمی و ادویه‌ای با روحیه شما همخوانی کامل دارند.",
+                        kitName: "کیت کشف حاکم",
+                        kitImage: "https://images.unsplash.com/photo-1617195822398-71329a36b176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+                        kitPerfumes: ['عطر چوبی "اعتبار"', 'عطر چرمی "میراث"', 'عطر ادویه‌ای "اقتدار"']
+                    },
+                    creator: {
+                        title: "آرکتایپ خالق",
+                        explanation: "انتخاب شما برای فضاهای هنری و تمایلتان به پروژه‌های خلاقانه، نشان‌دهنده روحیه‌ای نوآور، مستقل و دارای اصالت است. شما از ساختن چیزهای جدید و بیان خود به شیوه‌ای منحصربه‌فرد لذت می‌برید.",
+                        fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که ساختارشکن و غیرمنتظره هستند. نت‌های سبز، معدنی، آلدهیدی و ترکیبات غیرمعمول، با روحیه شما همخوانی دارند.",
+                        kitName: "کیت کشف خالق",
+                        kitImage: "https://images.unsplash.com/photo-1594035918253-8a3a0b3bb875?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+                        kitPerfumes: ['عطر آلدهیدی "تابو شکن"', 'عطر سبز "بکر"', 'عطر معدنی "امضا"']
+                    },
+                    lover: {
+                        title: "آرکتایپ عاشق",
+                        explanation: "انتخاب شما برای فضاهای گرم و صمیمی و تمرکزتان بر اشتیاق و روابط، نشان‌دهنده شخصیتی احساسی، خونگرم و اجتماعی است. شما برای زیبایی، هماهنگی و ارتباطات عمیق ارزش قائل هستید.",
+                        fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که حس صمیمیت، جذابیت و لطافت را القا می‌کنند. نت‌های گلی، شیرین، میوه‌ای و شرقی با روحیه شما همخوانی دارند.",
+                        kitName: "کیت کشف عاشق",
+                        kitImage: "https://images.unsplash.com/photo-1598202092283-75b9f151a65d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+                        kitPerfumes: ['عطر گلی "باغ مخفی"', 'عطر شرقی "شیدایی"', 'عطر وانیلی "آغوش گرم"']
+                    },
+                    explorer: {
+                        title: "آرکتایپ جستجوگر",
+                        explanation: "انتخاب شما برای فضاهای باز و بکر و تمرکزتان بر آزادی و کشف، نشان‌دهنده شخصیتی ماجراجو، مستقل و پرانرژی است. شما از تجربه کردن، یادگیری و شکستن مرزها لذت می‌برید.",
+                        fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که حس طراوت، سرزندگی و آزادی را منتقل می‌کنند. نت‌های مرکباتی، آروماتیک، دریایی و سبز با روحیه شما همخوانی دارند.",
+                        kitName: "کیت کشف جستجوگر",
+                        kitImage: "https://images.unsplash.com/photo-1600950335862-34998a432471?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+                        kitPerfumes: ['عطر مرکباتی "نسیم سحر"', 'عطر دریایی "اقیانوس"', 'عطر آروماتیک "اوج"']
+                    }
+                };
+
+                const result = resultsData[archetype];
+                const resultsContent = document.getElementById('resultsContent');
+                resultsContent.innerHTML = `
+                    <div class="animate-fade-in text-right">
+                        <p class="text-xl text-yellow-400 mb-2">آرکتایپ بویایی شما:</p>
+                        <h4 class="text-4xl font-bold text-white mb-4">${result.title}</h4>
+                        
+                        <div class="border-t border-b border-emerald-800 py-4 my-4">
+                            <h5 class="text-xl font-bold text-white mb-2">تحلیل شخصیت:</h5>
+                            <p class="text-lg text-gray-300">${result.explanation}</p>
+                        </div>
+
+                        <div class="border-b border-emerald-800 py-4 my-4">
+                            <h5 class="text-xl font-bold text-white mb-2">پیوند با رایحه:</h5>
+                            <p class="text-lg text-gray-300">${result.fragranceLink}</p>
+                        </div>
+                        
+                        <div class="bg-emerald-900 p-6 rounded-xl max-w-md mx-auto mt-8 text-center">
+                            <h5 class="text-2xl font-bold text-white mb-4">کیت کشف پیشنهادی شما:</h5>
+                            <img src="${result.kitImage}" alt="${result.kitName}" class="rounded-lg mb-4 w-full h-48 object-cover">
+                            <h6 class="text-xl font-bold text-white">${result.kitName}</h6>
+                            <p class="text-gray-400 mt-2 mb-4">شامل نمونه‌هایی از عطرهای زیر:</p>
+                            <ul class="text-gray-300 list-none space-y-1">
+                                ${result.kitPerfumes.map(p => `<li>${p}</li>`).join('')}
+                            </ul>
+                            <button class="btn-primary font-bold py-3 px-8 rounded-lg text-lg mt-6 w-full">
+                                افزودن کیت به سبد خرید
+                            </button>
+                        </div>
+                    </div>
+                `;
+            };
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
                     });
                 });
-            }
+            });
         });
     </script>
 
 </body>
 </html>
- 
