@@ -730,4 +730,197 @@
                         <div class="relative z-10">
                             <div class="text-center">
                                 <h2 class="font-cinzel text-3xl text-yellow-400 tracking-widest">CERTIFICATE</h2>
-                                <p class="font-cinzel text-lg text-gray-200">OF SCENT AUTHENTICITY
+                                <p class="font-cinzel text-lg text-gray-200">OF SCENT AUTHENTICITY</p>
+                            </div>
+                            <div class="border-t border-yellow-400 opacity-50 my-6"></div>
+                            <div class="text-right space-y-2">
+                                <p class="text-lg text-right">این شناسنامه برای رایحه خلق شده با نام <strong class="text-2xl font-bold text-yellow-300">${journeyState.perfumeName}</strong> صادر گردیده است.</p>
+                            </div>
+                            <div class="text-right space-y-2 pt-6 mt-6 border-t border-emerald-700">
+                                <p><strong class="text-yellow-400">آرکتایپ رایحه:</strong> ${hybridTitle}</p>
+                                <p><strong class="text-yellow-400">نت‌های اصلی:</strong> ${allNotes.join('، ')}</p>
+                            </div>
+                            <div class="pt-8 mt-8 flex justify-between items-end border-t border-emerald-700">
+                                <div>
+                                    <p class="font-cinzel text-sm">AROMA MASTER PERFUMER</p>
+                                    <p class="text-xs text-gray-400">عطرساز ارشد آروما</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm">${issueDate}</p>
+                                    <p class="text-xs text-gray-400">تاریخ صدور</p>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/AromaC.png" alt="مهر اصالت" class="absolute bottom-6 left-6 w-32 h-32 opacity-90">
+                    </div>
+                `;
+            }
+
+            function updateJourneyUI() {
+                const stepId = journeySteps[journeyState.currentStepIndex];
+                const totalQuizSteps = 6;
+                
+                // Title
+                journeyTitle.textContent = stepId.startsWith('quiz') ? `تحلیل شخصیت (${journeyState.currentStepIndex + 1}/${totalQuizSteps})` : 'سفر بویایی شما';
+                
+                // Footer visibility
+                if (stepId === 'final_offer' || stepId === 'certificate') {
+                    journeyFooter.innerHTML = `<button id="finishJourneyBtn" class="btn-primary font-bold py-2 px-8 rounded-lg mx-auto">پایان و بستن</button>`;
+                    document.getElementById('finishJourneyBtn').addEventListener('click', closeJourneyModal);
+                } else {
+                    journeyFooter.innerHTML = `
+                        <button id="prevBtn" class="bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-emerald-600 transition disabled:opacity-50 disabled:cursor-not-allowed">قبلی</button>
+                        <div id="stepIndicator" class="text-gray-400"></div>
+                        <button id="nextBtn" class="btn-primary font-bold py-2 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">بعدی</button>
+                    `;
+                    const newPrevBtn = document.getElementById('prevBtn');
+                    const newNextBtn = document.getElementById('nextBtn');
+                    newPrevBtn.disabled = journeyState.currentStepIndex === 0;
+                    
+                    let nextDisabled = false;
+                    if (stepId.startsWith('quiz')) {
+                        nextDisabled = journeyState.answers[journeyState.currentStepIndex] === undefined;
+                    } else if (stepId === 'personalization') {
+                        const totalNotes = Object.values(journeyState.selectedNotes).reduce((acc, notes) => acc + notes.length, 0);
+                        nextDisabled = !journeyState.perfumeName.trim() || totalNotes === 0;
+                    }
+                    newNextBtn.disabled = nextDisabled;
+
+                    if (journeySteps[journeyState.currentStepIndex + 1] === 'results') {
+                        newNextBtn.textContent = 'مشاهده تحلیل';
+                    } else if (journeySteps[journeyState.currentStepIndex + 1] === 'personalization') {
+                        newNextBtn.textContent = 'شخصی‌سازی رایحه';
+                    } else if (journeySteps[journeyState.currentStepIndex + 1] === 'final_offer') {
+                        newNextBtn.textContent = 'تایید و ادامه';
+                    } else {
+                        newNextBtn.textContent = 'بعدی';
+                    }
+
+                    newNextBtn.addEventListener('click', () => {
+                        if (newNextBtn.disabled) return;
+                        if (journeyState.currentStepIndex < journeySteps.length - 1) {
+                            journeyState.currentStepIndex++;
+                            renderJourneyStep();
+                        }
+                    });
+
+                    newPrevBtn.addEventListener('click', () => {
+                        if (journeyState.currentStepIndex > 0) {
+                            journeyState.currentStepIndex--;
+                            renderJourneyStep();
+                        }
+                    });
+                }
+            }
+            
+            // --- OCR Logic ---
+            const startOcrBtn = document.getElementById('startOcrBtn');
+            const ocrResultModal = document.getElementById('ocrResultModal');
+            const ocrResultContainer = document.getElementById('ocrResultContainer');
+            const ocrResultContent = document.getElementById('ocrResultContent');
+            const closeOcrResultBtn = document.getElementById('closeOcrResultBtn');
+            const cameraModal = document.getElementById('cameraModal');
+            const cameraContainer = document.getElementById('cameraContainer');
+            const cameraFeed = document.getElementById('cameraFeed');
+            const photoCanvas = document.getElementById('photoCanvas');
+            const captureBtn = document.getElementById('captureBtn');
+            const closeCameraBtn = document.getElementById('closeCameraBtn');
+            let stream;
+
+            startOcrBtn.addEventListener('click', async () => {
+                cameraModal.classList.remove('hidden');
+                cameraModal.classList.add('flex');
+                setTimeout(() => cameraContainer.classList.remove('scale-95', 'opacity-0'), 10);
+                
+                try {
+                    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+                    cameraFeed.srcObject = stream;
+                } catch (err) {
+                    console.error("Error accessing camera: ", err);
+                    // Show an error message to the user
+                    cameraModal.classList.add('hidden');
+                }
+            });
+
+            function stopCamera() {
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                }
+                cameraModal.classList.add('hidden');
+                cameraContainer.classList.add('scale-95', 'opacity-0');
+            }
+
+            closeCameraBtn.addEventListener('click', stopCamera);
+
+            captureBtn.addEventListener('click', () => {
+                const context = photoCanvas.getContext('2d');
+                photoCanvas.width = cameraFeed.videoWidth;
+                photoCanvas.height = cameraFeed.videoHeight;
+                context.drawImage(cameraFeed, 0, 0, photoCanvas.width, photoCanvas.height);
+                
+                stopCamera();
+
+                // Show loading/analyzing simulation
+                ocrResultContent.innerHTML = `
+                    <div class="text-center">
+                        <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-yellow-400 mx-auto"></div>
+                        <p class="mt-4 text-lg">در حال تحلیل تصویر با هوش مصنوعی...</p>
+                    </div>
+                `;
+                ocrResultModal.classList.remove('hidden');
+                ocrResultModal.classList.add('flex');
+                setTimeout(() => ocrResultContainer.classList.remove('scale-95', 'opacity-0'), 10);
+
+                // Simulate API call and show results
+                setTimeout(() => {
+                    showOcrResults();
+                }, 2500);
+            });
+            
+            function showOcrResults() {
+                 ocrResultContent.innerHTML = `
+                    <div class="certificate-new p-8 max-w-4xl mx-auto animate-fade-in text-white">
+                        <div class="certificate-new-bg"></div>
+                        <div class="certificate-border"></div>
+                        <div class="relative z-10">
+                            <div class="text-center">
+                                <h2 class="font-cinzel text-3xl text-yellow-400 tracking-widest">ANALYSIS</h2>
+                                <p class="font-cinzel text-lg text-gray-200">OF SCENT PROFILE</p>
+                            </div>
+                            <div class="border-t border-yellow-400 opacity-50 my-6"></div>
+                            <div class="text-right space-y-2">
+                                <p class="text-lg text-right">تحلیل رایحه شناسایی شده <strong class="text-2xl font-bold text-yellow-300">Dior Sauvage</strong></p>
+                            </div>
+                            <div class="text-right space-y-2 pt-6 mt-6 border-t border-emerald-700">
+                                <p><strong class="text-yellow-400">خانواده بویایی:</strong> آروماتیک فوژه</p>
+                                <p><strong class="text-yellow-400">نت‌های آغازی:</strong> ترنج، فلفل</p>
+                                <p><strong class="text-yellow-400">نت‌های میانی:</strong> اسطوخودوس، شمعدانی، فلفل صورتی</p>
+                                <p><strong class="text-yellow-400">نت‌های پایانی:</strong> آمبروکسان، سدر، لابدانیوم</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            closeOcrResultBtn.addEventListener('click', () => {
+                ocrResultContainer.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    ocrResultModal.classList.add('hidden');
+                    ocrResultModal.classList.remove('flex');
+                }, 300);
+            });
+            
+            // --- Smooth scrolling for anchor links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
