@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" xintegrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -81,6 +81,32 @@
             25% { transform: translateX(-5px); }
             75% { transform: translateX(5px); }
         }
+        /* New Certificate Styles */
+        .certificate-new {
+            background-color: #064e3b;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+        .certificate-new-bg {
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 25%, transparent 25%),
+                        linear-gradient(225deg, rgba(212, 175, 55, 0.15) 25%, transparent 25%);
+            background-size: 100px 100px;
+            transform: rotate(-45deg);
+            opacity: 0.3;
+        }
+        .certificate-border {
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            border-radius: 0.75rem;
+            border: 2px solid #D4AF37;
+            pointer-events: none;
+        }
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
@@ -102,21 +128,8 @@
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-emerald-950 bg-opacity-80 backdrop-blur-sm shadow-md">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <!-- SVG Logo -->
             <a href="#home" class="flex items-center">
-                <svg width="150" height="50" viewBox="0 0 150 50" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#EACD65;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <path d="M25 45 C 15 45, 10 35, 10 25 C 10 15, 15 5, 25 5 C 35 5, 40 15, 40 25 C 40 35, 35 45, 25 45 Z" fill="#000"/>
-                    <path d="M25,10 C 22,10 20,12 20,15 C 20,20 22,22 25,28 C 28,22 30,20 30,15 C 30,12 28,10 25,10 Z M25,16 C 24,16 23.5,16.5 23.5,17.5 C 23.5,19 25,21 25,21 C 25,21 26.5,19 26.5,17.5 C 26.5,16.5 26,16 25,16 Z" fill="url(#goldGradient)"/>
-                    <path d="M20,28 C 18,30 18,35 22,38 L 28,38 C 32,35 32,30 30,28 L 25,32 L 20,28 Z" fill="url(#goldGradient)"/>
-                    <text x="55" y="28" class="font-cinzel" font-size="18" fill="white" font-weight="bold">AROMA</text>
-                    <text x="55" y="42" class="font-cinzel" font-size="8" fill="#D4AF37" letter-spacing="1">PERFUME STORE</text>
-                </svg>
+                <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/logo.png" alt="آروما لوگو" class="h-12">
             </a>
             <nav class="hidden md:flex space-x-8 space-x-reverse text-lg">
                 <a href="#philosophy" class="text-gray-300 hover:text-white transition">فلسفه ما</a>
@@ -207,20 +220,7 @@
     <footer id="contact" class="bg-emerald-950 py-10 border-t border-emerald-900">
         <div class="container mx-auto px-6 text-center text-gray-300">
             <div class="mb-8 flex flex-col items-center">
-                 <!-- SVG Logo in Footer -->
-                <svg width="200" height="60" viewBox="0 0 150 50" xmlns="http://www.w3.org/2000/svg" class="mb-6">
-                     <defs>
-                        <linearGradient id="goldGradientFooter" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#EACD65;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <path d="M25 45 C 15 45, 10 35, 10 25 C 10 15, 15 5, 25 5 C 35 5, 40 15, 40 25 C 40 35, 35 45, 25 45 Z" fill="#000"/>
-                    <path d="M25,10 C 22,10 20,12 20,15 C 20,20 22,22 25,28 C 28,22 30,20 30,15 C 30,12 28,10 25,10 Z M25,16 C 24,16 23.5,16.5 23.5,17.5 C 23.5,19 25,21 25,21 C 25,21 26.5,19 26.5,17.5 C 26.5,16.5 26,16 25,16 Z" fill="url(#goldGradientFooter)"/>
-                    <path d="M20,28 C 18,30 18,35 22,38 L 28,38 C 32,35 32,30 30,28 L 25,32 L 20,28 Z" fill="url(#goldGradientFooter)"/>
-                    <text x="55" y="28" class="font-cinzel" font-size="18" fill="white" font-weight="bold">AROMA</text>
-                    <text x="55" y="42" class="font-cinzel" font-size="8" fill="#D4AF37" letter-spacing="1">PERFUME STORE</text>
-                </svg>
+                 <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/logo.png" alt="آروما لوگو" class="h-16 mb-6">
                 <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 text-lg">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-location-dot text-yellow-400"></i>
@@ -278,10 +278,11 @@
             let journeyState = {};
 
             const journeySteps = [
-                'quiz_1', 'quiz_2', 'quiz_3', 'quiz_4', 
+                'quiz_1', 'quiz_2', 'quiz_3', 'quiz_4', 'quiz_5', 'quiz_6',
                 'results', 
                 'personalization', 
-                'final_offer'
+                'final_offer',
+                'certificate'
             ];
 
             const questions = [
@@ -289,40 +290,56 @@
                     type: 'visual',
                     question: "کدام یک از این فضاها بیشتر به شما حس تعلق می‌دهد؟",
                     options: [
-                        { image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', value: 'lover', alt: 'جشن شلوغ و پرنور' },
-                        { image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', value: 'ruler', alt: 'کتابخانه ساکت و کلاسیک' },
-                        { image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', value: 'creator', alt: 'گالری هنری مینیمال' },
-                        { image: 'https://images.unsplash.com/photo-1507525428034-b723a996f6ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', value: 'explorer', alt: 'ساحل بکر و دست نخورده' }
+                        { image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', scores: { lover: 1.5, explorer: 0.5 }, alt: 'جشن شلوغ و پرنور' },
+                        { image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', scores: { ruler: 1.5, creator: 0.5 }, alt: 'کتابخانه ساکت و کلاسیک' },
+                        { image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', scores: { creator: 1.5, ruler: 0.2 }, alt: 'گالری هنری مینیمال' },
+                        { image: 'https://images.unsplash.com/photo-1507525428034-b723a996f6ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80', scores: { explorer: 1.5, lover: 0.2 }, alt: 'ساحل بکر و دست نخورده' }
                     ]
                 },
                 {
                     type: 'text',
                     question: "یک آخر هفته کاملاً آزاد دارید. ترجیح شما چیست؟",
                     options: [
-                        { text: "برنامه‌ریزی برای یک سفر کوتاه و کشف یک مکان جدید.", value: "explorer" },
-                        { text: "دعوت از دوستان نزدیک برای یک مهمانی شام صمیمی در خانه.", value: "lover" },
-                        { text: "کار کردن روی یک پروژه شخصی خلاقانه که مدت‌هاست ذهن شما را درگیر کرده.", value: "creator" },
-                        { text: "شرکت در یک کنفرانس یا کارگاه برای پیشرفت شغلی و شبکه‌سازی.", value: "ruler" }
+                        { text: "برنامه‌ریزی برای یک سفر کوتاه و کشف یک مکان جدید.", scores: { explorer: 1.0 } },
+                        { text: "دعوت از دوستان نزدیک برای یک مهمانی شام صمیمی در خانه.", scores: { lover: 1.0 } },
+                        { text: "کار کردن روی یک پروژه شخصی خلاقانه که مدت‌هاست ذهن شما را درگیر کرده.", scores: { creator: 1.0 } },
+                        { text: "شرکت در یک کنفرانس یا کارگاه برای پیشرفت شغلی و شبکه‌سازی.", scores: { ruler: 1.0 } }
                     ]
                 },
                 {
                     type: 'text',
                     question: "کدام کلمه برای شما مهم‌تر است؟",
                     options: [
-                        { text: "موفقیت", value: "ruler" },
-                        { text: "اشتیاق", value: "lover" },
-                        { text: "آزادی", value: "explorer" },
-                        { text: "اصالت", value: "creator" }
+                        { text: "موفقیت", scores: { ruler: 1.2 } },
+                        { text: "اشتیاق", scores: { lover: 1.2 } },
+                        { text: "آزادی", scores: { explorer: 1.2 } },
+                        { text: "اصالت", scores: { creator: 1.2 } }
                     ]
                 },
                  {
                     type: 'text',
                     question: "وقتی با یک چالش بزرگ روبرو می‌شوید، اولین واکنش شما چیست؟",
                     options: [
-                        { text: "کنترل اوضاع را به دست می‌گیرم و یک استراتژی برای حل آن طراحی می‌کنم.", value: "ruler" },
-                        { text: "به دنبال یک راه حل خلاقانه و خارج از چارچوب می‌گردم.", value: "creator" },
-                        { text: "با افراد مورد اعتمادم مشورت می‌کنم و از حمایت آن‌ها استفاده می‌کنم.", value: "lover" },
-                        { text: "آن را به عنوان یک ماجراجویی جدید می‌بینم و با آغوش باز به استقبالش می‌روم.", value: "explorer" }
+                        { text: "کنترل اوضاع را به دست می‌گیرم و یک استراتژی برای حل آن طراحی می‌کنم.", scores: { ruler: 1.0, creator: 0.3 } },
+                        { text: "به دنبال یک راه حل خلاقانه و خارج از چارچوب می‌گردم.", scores: { creator: 1.0, explorer: 0.3 } },
+                        { text: "با افراد مورد اعتمادم مشورت می‌کنم و از حمایت آن‌ها استفاده می‌کنم.", scores: { lover: 1.0 } },
+                        { text: "آن را به عنوان یک ماجراجویی جدید می‌بینم و با آغوش باز به استقبالش می‌روم.", scores: { explorer: 1.0, lover: 0.3 } }
+                    ]
+                },
+                {
+                    type: 'text',
+                    question: "کدام بافت را ترجیح می‌دهید؟",
+                    options: [
+                        { text: "لمس مخمل نرم و گران‌قیمت", scores: { lover: 1.2, ruler: 0.5 } },
+                        { text: "لمس کتان طبیعی و راحت", scores: { explorer: 1.2, creator: 0.5 } }
+                    ]
+                },
+                {
+                    type: 'text',
+                    question: "در یک سرمایه‌گذاری، کدام برای شما مهم‌تر است؟",
+                    options: [
+                        { text: "بازدهی بالا، حتی با ریسک زیاد", scores: { explorer: 1.2, creator: 0.3 } },
+                        { text: "بازدهی مطمئن، حتی با سود کمتر", scores: { ruler: 1.2, lover: 0.3 } }
                     ]
                 }
             ];
@@ -349,28 +366,44 @@
 
             const archetypeData = {
                 ruler: {
-                    title: "آرکتایپ حاکم",
-                    explanation: "انتخاب شما برای فضاهای کلاسیک و تمرکزتان بر موفقیت و استراتژی، نشان‌دهنده شخصیتی قدرتمند، منظم و با اعتماد به نفس است. شما به کیفیت، کنترل و ساختارهای پایدار اهمیت می‌دهید.",
-                    fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که حس قدرت و وقار را منتقل می‌کنند. نت‌های سنگین، چوبی، چرمی و ادویه‌ای با روحیه شما همخوانی کامل دارند.",
-                    recommendedNotes: { top: ['زعفران'], middle: ['جیر', 'روایح دودی'], base: ['چوب سدر', 'چرم'] }
+                    title: "حاکم",
+                    explanation: "شما شخصیتی قدرتمند، منظم و با اعتماد به نفس هستید که به کیفیت، کنترل و ساختارهای پایدار اهمیت می‌دهید.",
+                    fragranceLink: "این پروفایل جذب رایحه‌هایی می‌شود که حس قدرت و وقار را منتقل می‌کنند: نت‌های سنگین، چوبی، چرمی و ادویه‌ای.",
+                    recommendedNotes: { top: ['زعفران'], middle: ['جیر', 'روایح دودی'], base: ['چوب سدر', 'چرم'] },
+                    scentProfile: 'چوبی، قدرتمند، باوقار',
+                    season: 'پاییز و زمستان',
+                    occasion: 'جلسات رسمی، رویدادهای شبانه',
+                    story: 'قدرت در سکوت، شکوه در اصالت.'
                 },
                 creator: {
-                    title: "آرکتایپ خالق",
-                    explanation: "انتخاب شما برای فضاهای هنری و تمایلتان به پروژه‌های خلاقانه، نشان‌دهنده روحیه‌ای نوآور، مستقل و دارای اصالت است. شما از ساختن چیزهای جدید و بیان خود به شیوه‌ای منحصربه‌فرد لذت می‌برید.",
-                    fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که ساختارشکن و غیرمنتظره هستند. نت‌های سبز، معدنی، و ترکیبات غیرمعمول، با روحیه شما همخوانی دارند.",
-                    recommendedNotes: { top: ['گریپ فروت', 'فلفل صورتی'], middle: ['زنبق', 'شمعدانی'], base: ['خس خس (وتیور)', 'پچولی (نعناع هندی)'] }
+                    title: "خالق",
+                    explanation: "شما روحیه‌ای نوآور، مستقل و دارای اصالت دارید و از ساختن چیزهای جدید و بیان خود به شیوه‌ای منحصربه‌فرد لذت می‌برید.",
+                    fragranceLink: "این پروفایل جذب رایحه‌های ساختارشکن و غیرمنتظره می‌شود: نت‌های سبز، معدنی، و ترکیبات غیرمعمول.",
+                    recommendedNotes: { top: ['گریپ فروت', 'فلفل صورتی'], middle: ['زنبق', 'شمعدانی'], base: ['خس خس (وتیور)', 'پچولی (نعناع هندی)'] },
+                    scentProfile: 'هنری، سبز، غیرمنتظره',
+                    season: 'بهار و پاییز',
+                    occasion: 'رویدادهای هنری، محیط کار خلاق',
+                    story: 'شکستن مرزها، خلق یک امضای جدید.'
                 },
                 lover: {
-                    title: "آرکتایپ عاشق",
-                    explanation: "انتخاب شما برای فضاهای گرم و صمیمی و تمرکزتان بر اشتیاق و روابط، نشان‌دهنده شخصیتی احساسی، خونگرم و اجتماعی است. شما برای زیبایی، هماهنگی و ارتباطات عمیق ارزش قائل هستید.",
-                    fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که حس صمیمیت، جذابیت و لطافت را القا می‌کنند. نت‌های گلی، شیرین، میوه‌ای و شرقی با روحیه شما همخوانی دارند.",
-                    recommendedNotes: { top: ['ترنج'], middle: ['رز', 'یاس', 'بهار نارنج'], base: ['وانیل', 'مشک'] }
+                    title: "عاشق",
+                    explanation: "شما شخصیتی احساسی، خونگرم و اجتماعی دارید و برای زیبایی، هماهنگی و ارتباطات عمیق ارزش قائل هستید.",
+                    fragranceLink: "این پروفایل جذب رایحه‌هایی می‌شود که حس صمیمیت و جذابیت را القا می‌کنند: نت‌های گلی، شیرین، میوه‌ای و شرقی.",
+                    recommendedNotes: { top: ['ترنج'], middle: ['رز', 'یاس', 'بهار نارنج'], base: ['وانیل', 'مشک'] },
+                    scentProfile: 'گرم، شیرین، اغواگر',
+                    season: 'تمام فصول',
+                    occasion: 'ملاقات‌های عاشقانه، دورهمی‌های صمیمی',
+                    story: 'روایتگر شور و صمیمیت.'
                 },
                 explorer: {
-                    title: "آرکتایپ جستجوگر",
-                    explanation: "انتخاب شما برای فضاهای باز و بکر و تمرکزتان بر آزادی و کشف، نشان‌دهنده شخصیتی ماجراجو، مستقل و پرانرژی است. شما از تجربه کردن، یادگیری و شکستن مرزها لذت می‌برید.",
-                    fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که حس طراوت، سرزندگی و آزادی را منتقل می‌کنند. نت‌های مرکباتی، آروماتیک، دریایی و سبز با روحیه شما همخوانی دارند.",
-                    recommendedNotes: { top: ['لیموترش', 'آب دریا'], middle: ['اسطوخودوس', 'چای'], base: ['خزه بلوط', 'کهربا'] }
+                    title: "جستجوگر",
+                    explanation: "شما شخصیتی ماجراجو، مستقل و پرانرژی دارید و از تجربه کردن، یادگیری و شکستن مرزها لذت می‌برید.",
+                    fragranceLink: "این پروفایل جذب رایحه‌هایی می‌شود که حس طراوت و آزادی را منتقل می‌کنند: نت‌های مرکباتی، آروماتیک و دریایی.",
+                    recommendedNotes: { top: ['لیموترش', 'آب دریا'], middle: ['اسطوخودوس', 'چای'], base: ['خزه بلوط', 'کهربا'] },
+                    scentProfile: 'تازه، پرانرژی، آزاد',
+                    season: 'بهار و تابستان',
+                    occasion: 'فعالیت‌های روزانه، سفر و ماجراجویی',
+                    story: 'دعوت به کشف ناشناخته‌ها.'
                 }
             };
             
@@ -378,7 +411,7 @@
                 journeyState = {
                     currentStepIndex: 0,
                     answers: {},
-                    archetype: null,
+                    archetype: { primary: null, secondary: null },
                     selectedNotes: { top: [], middle: [], base: [] },
                     perfumeName: ''
                 };
@@ -421,26 +454,28 @@
                     renderPersonalizationStep();
                 } else if (stepId === 'final_offer') {
                     renderFinalOfferStep();
+                } else if (stepId === 'certificate') {
+                    renderCertificateStep();
                 }
                 updateJourneyUI();
             }
             
             function renderQuizStep() {
-                const questionIndex = parseInt(journeyState.currentStepIndex);
+                const questionIndex = journeyState.currentStepIndex;
                 const stepData = questions[questionIndex];
                 let contentHtml = '';
 
                 if (stepData.type === 'visual') {
-                    const optionsHtml = stepData.options.map((opt) => `
-                        <div class="cursor-pointer visual-option rounded-lg overflow-hidden ${journeyState.answers[questionIndex] === opt.value ? 'selected' : ''}" data-value="${opt.value}">
+                    const optionsHtml = stepData.options.map((opt, index) => `
+                        <div class="cursor-pointer visual-option rounded-lg overflow-hidden ${journeyState.answers[questionIndex] === index ? 'selected' : ''}" data-index="${index}">
                             <img src="${opt.image}" alt="${opt.alt}" class="w-full h-40 md:h-48 object-cover">
                         </div>
                     `).join('');
                     contentHtml = `<div class="grid grid-cols-2 md:grid-cols-4 gap-4">${optionsHtml}</div>`;
                 } else {
-                    const optionsHtml = stepData.options.map((opt) => `
-                        <label class="block card p-4 rounded-lg cursor-pointer hover:bg-emerald-800 transition border-2 ${journeyState.answers[questionIndex] === opt.value ? 'border-yellow-400' : 'border-transparent'}">
-                            <input type="radio" name="q${questionIndex}" value="${opt.value}" class="hidden" ${journeyState.answers[questionIndex] === opt.value ? 'checked' : ''}>
+                    const optionsHtml = stepData.options.map((opt, index) => `
+                        <label class="block card p-4 rounded-lg cursor-pointer hover:bg-emerald-800 transition border-2 ${journeyState.answers[questionIndex] === index ? 'border-yellow-400' : 'border-transparent'}">
+                            <input type="radio" name="q${questionIndex}" value="${index}" class="hidden" ${journeyState.answers[questionIndex] === index ? 'checked' : ''}>
                             <span class="text-lg">${opt.text}</span>
                         </label>
                     `).join('');
@@ -456,14 +491,14 @@
                 if (stepData.type === 'visual') {
                     journeyContent.querySelectorAll('.visual-option').forEach(el => {
                         el.addEventListener('click', (e) => {
-                            journeyState.answers[questionIndex] = e.currentTarget.dataset.value;
+                            journeyState.answers[questionIndex] = parseInt(e.currentTarget.dataset.index);
                             renderJourneyStep();
                         });
                     });
                 } else {
                     journeyContent.querySelectorAll(`input[name="q${questionIndex}"]`).forEach(radio => {
                         radio.addEventListener('change', (e) => {
-                            journeyState.answers[questionIndex] = e.target.value;
+                            journeyState.answers[questionIndex] = parseInt(e.target.value);
                             renderJourneyStep();
                         });
                     });
@@ -472,29 +507,44 @@
 
             function renderResultsStep() {
                 const scores = { ruler: 0, creator: 0, lover: 0, explorer: 0 };
-                for(const step in journeyState.answers) {
-                    scores[journeyState.answers[step]]++;
+                for(const qIndex in journeyState.answers) {
+                    const answerIndex = journeyState.answers[qIndex];
+                    const answerScores = questions[qIndex].options[answerIndex].scores;
+                    for (const archetype in answerScores) {
+                        scores[archetype] += answerScores[archetype];
+                    }
                 }
-                journeyState.archetype = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
                 
-                const result = archetypeData[journeyState.archetype];
+                const sortedArchetypes = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+                journeyState.archetype.primary = sortedArchetypes[0][0];
+                journeyState.archetype.secondary = sortedArchetypes[1][0];
+
+                const primary = archetypeData[journeyState.archetype.primary];
+                const secondary = archetypeData[journeyState.archetype.secondary];
                 
-                // Pre-populate selected notes for next step
-                journeyState.selectedNotes = JSON.parse(JSON.stringify(result.recommendedNotes));
+                const hybridTitle = `«${primary.title} با رگه‌هایی از ${secondary.title}»`;
+
+                // Pre-populate selected notes
+                const recommended = {
+                    top: [...new Set([...primary.recommendedNotes.top, ...secondary.recommendedNotes.top])].slice(0, 2),
+                    middle: [...new Set([...primary.recommendedNotes.middle, ...secondary.recommendedNotes.middle])].slice(0, 3),
+                    base: [...new Set([...primary.recommendedNotes.base, ...secondary.recommendedNotes.base])].slice(0, 2)
+                };
+                journeyState.selectedNotes = JSON.parse(JSON.stringify(recommended));
 
                 journeyContent.innerHTML = `
                     <div class="animate-fade-in text-right">
                         <p class="text-xl text-yellow-400 mb-2">مرحله ۱: تحلیل شخصیت شما</p>
-                        <h4 class="text-4xl font-bold text-white mb-4">${result.title}</h4>
+                        <h4 class="text-4xl font-bold text-white mb-4">${hybridTitle}</h4>
                         
                         <div class="border-t border-b border-emerald-800 py-4 my-4">
                             <h5 class="text-xl font-bold text-white mb-2">تحلیل شخصیت:</h5>
-                            <p class="text-lg text-gray-300">${result.explanation}</p>
+                            <p class="text-lg text-gray-300">${primary.explanation} این ویژگی‌ها با استقلال‌طلبی و خلاقیت آرکتایپ ${secondary.title} ترکیب شده و شخصیتی چندبعدی و منحصربه‌فرد را شکل می‌دهد.</p>
                         </div>
 
                         <div class="border-b border-emerald-800 py-4 my-4">
                             <h5 class="text-xl font-bold text-white mb-2">نت‌های پیشنهادی برای شما:</h5>
-                            <p class="text-lg text-gray-300">${result.fragranceLink}</p>
+                            <p class="text-lg text-gray-300">ترکیبی هوشمند از رایحه‌های مرتبط با هر دو آرکتایپ شما، یک پروفایل بویایی پیچیده و خاص ایجاد می‌کند.</p>
                         </div>
                     </div>
                 `;
@@ -590,15 +640,74 @@
                         رایحه <strong class="text-yellow-400">"${journeyState.perfumeName}"</strong> بر اساس انتخاب شما طراحی شده است. حالا می‌توانید آن را تجربه کنید.
                     </p>
                     <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                        <div class="card p-8 rounded-xl flex flex-col items-center text-center border-2 border-transparent hover:border-yellow-400 transition">
+                        <div id="orderKitBtn" class="card p-8 rounded-xl flex flex-col items-center text-center border-2 border-transparent hover:border-yellow-400 transition cursor-pointer">
                             <h4 class="text-2xl font-bold text-white mb-4">گزینه ۱: کیت کشف</h4>
                             <p class="text-gray-300 mb-6 flex-grow">یک کیت نمونه حاوی عطر شخصی‌سازی شده خودتان را دریافت کنید تا آن را روی پوست خود امتحان کرده و از انتخاب نهایی مطمئن شوید.</p>
-                            <button class="btn-primary font-bold py-3 px-8 rounded-lg text-lg w-full mt-4">سفارش کیت کشف</button>
+                            <span class="btn-primary font-bold py-3 px-8 rounded-lg text-lg w-full mt-4">سفارش کیت کشف</span>
                         </div>
-                        <div class="card p-8 rounded-xl flex flex-col items-center text-center border-2 border-transparent hover:border-yellow-400 transition">
+                        <div id="orderBottleBtn" class="card p-8 rounded-xl flex flex-col items-center text-center border-2 border-transparent hover:border-yellow-400 transition cursor-pointer">
                             <h4 class="text-2xl font-bold text-white mb-4">گزینه ۲: بطری کامل</h4>
                             <p class="text-gray-300 mb-6 flex-grow">اگر از ترکیب خود مطمئن هستید، بطری کامل عطر منحصربه‌فرد خود را سفارش دهید و از خلق اثر هنری خود لذت ببرید.</p>
-                            <button class="bg-emerald-700 text-white font-bold py-3 px-8 rounded-lg text-lg w-full mt-4 hover:bg-emerald-600">سفارش بطری کامل</button>
+                            <span class="bg-emerald-700 text-white font-bold py-3 px-8 rounded-lg text-lg w-full mt-4 hover:bg-emerald-600">سفارش بطری کامل</span>
+                        </div>
+                    </div>
+                `;
+
+                journeyContent.getElementById('orderKitBtn').addEventListener('click', () => {
+                    journeyState.currentStepIndex++;
+                    renderJourneyStep();
+                });
+                journeyContent.getElementById('orderBottleBtn').addEventListener('click', () => {
+                    journeyState.currentStepIndex++;
+                    renderJourneyStep();
+                });
+            }
+
+            function renderCertificateStep() {
+                const primary = archetypeData[journeyState.archetype.primary];
+                const secondary = archetypeData[journeyState.archetype.secondary];
+                const hybridTitle = `«${primary.title} با رگه‌هایی از ${secondary.title}»`;
+                const allNotes = [
+                    ...journeyState.selectedNotes.top,
+                    ...journeyState.selectedNotes.middle,
+                    ...journeyState.selectedNotes.base
+                ];
+                const today = new Date();
+                const issueDate = new Intl.DateTimeFormat('fa-IR').format(today);
+
+                journeyContent.innerHTML = `
+                    <div class="certificate-new p-8 max-w-4xl mx-auto animate-fade-in text-white">
+                        <div class="certificate-new-bg"></div>
+                        <div class="certificate-border"></div>
+                        <div class="relative z-10 flex flex-col md:flex-row gap-8">
+                            <div class="md:w-2/3 text-right space-y-4">
+                                <div class="text-center md:text-right">
+                                    <h2 class="font-cinzel text-3xl text-yellow-400 tracking-widest">CERTIFICATE</h2>
+                                    <p class="font-cinzel text-lg text-gray-200">OF SCENT AUTHENTICITY</p>
+                                </div>
+                                <div class="border-t border-yellow-400 opacity-50 my-4"></div>
+                                <p class="text-lg">این شناسنامه برای رایحه خلق شده با نام</p>
+                                <h3 class="text-4xl font-bold text-yellow-300 text-center py-2">${journeyState.perfumeName}</h3>
+                                <p class="text-lg">صادر گردیده است.</p>
+                                <div class="space-y-2 pt-4">
+                                    <p><strong class="text-yellow-400">آرکتایپ رایحه:</strong> ${hybridTitle}</p>
+                                    <p><strong class="text-yellow-400">نت‌های اصلی:</strong> ${allNotes.join('، ')}</p>
+                                </div>
+                                <div class="pt-6 flex justify-between items-end">
+                                    <div>
+                                        <p class="font-cinzel text-sm">AROMA MASTER PERFUMER</p>
+                                        <p class="text-xs text-gray-400">عطرساز ارشد آروما</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm">${issueDate}</p>
+                                        <p class="text-xs text-gray-400">تاریخ صدور</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md:w-1/3 flex flex-col items-center justify-between">
+                                <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/logo.png" alt="آروما لوگو" class="h-20">
+                                <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/AromaC.png" alt="مهر اصالت" class="w-40 h-40">
+                            </div>
                         </div>
                     </div>
                 `;
@@ -606,52 +715,60 @@
 
             function updateJourneyUI() {
                 const stepId = journeySteps[journeyState.currentStepIndex];
-                const totalQuizSteps = 4;
+                const totalQuizSteps = 6;
                 
                 // Title
                 journeyTitle.textContent = stepId.startsWith('quiz') ? `تحلیل شخصیت (${journeyState.currentStepIndex + 1}/${totalQuizSteps})` : 'سفر بویایی شما';
                 
                 // Footer visibility
-                journeyFooter.style.display = stepId === 'final_offer' ? 'none' : 'flex';
-
-                // Buttons
-                prevBtn.disabled = journeyState.currentStepIndex === 0;
-                
-                let nextDisabled = false;
-                if (stepId.startsWith('quiz')) {
-                    nextDisabled = journeyState.answers[journeyState.currentStepIndex] === undefined;
-                } else if (stepId === 'personalization') {
-                    const totalNotes = Object.values(journeyState.selectedNotes).reduce((acc, notes) => acc + notes.length, 0);
-                    nextDisabled = !journeyState.perfumeName.trim() || totalNotes === 0;
-                }
-                nextBtn.disabled = nextDisabled;
-
-                // Next Button Text
-                if (journeySteps[journeyState.currentStepIndex + 1] === 'results') {
-                    nextBtn.textContent = 'مشاهده تحلیل';
-                } else if (journeySteps[journeyState.currentStepIndex + 1] === 'personalization') {
-                    nextBtn.textContent = 'شخصی‌سازی رایحه';
-                } else if (journeySteps[journeyState.currentStepIndex + 1] === 'final_offer') {
-                    nextBtn.textContent = 'تایید و ادامه';
+                if (stepId === 'final_offer' || stepId === 'certificate') {
+                    journeyFooter.innerHTML = `<button id="finishJourneyBtn" class="btn-primary font-bold py-2 px-8 rounded-lg mx-auto">پایان و بستن</button>`;
+                    document.getElementById('finishJourneyBtn').addEventListener('click', closeJourneyModal);
                 } else {
-                    nextBtn.textContent = 'بعدی';
+                    journeyFooter.innerHTML = `
+                        <button id="prevBtn" class="bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-emerald-600 transition disabled:opacity-50 disabled:cursor-not-allowed">قبلی</button>
+                        <div id="stepIndicator" class="text-gray-400"></div>
+                        <button id="nextBtn" class="btn-primary font-bold py-2 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">بعدی</button>
+                    `;
+                    const newPrevBtn = document.getElementById('prevBtn');
+                    const newNextBtn = document.getElementById('nextBtn');
+                    newPrevBtn.disabled = journeyState.currentStepIndex === 0;
+                    
+                    let nextDisabled = false;
+                    if (stepId.startsWith('quiz')) {
+                        nextDisabled = journeyState.answers[journeyState.currentStepIndex] === undefined;
+                    } else if (stepId === 'personalization') {
+                        const totalNotes = Object.values(journeyState.selectedNotes).reduce((acc, notes) => acc + notes.length, 0);
+                        nextDisabled = !journeyState.perfumeName.trim() || totalNotes === 0;
+                    }
+                    newNextBtn.disabled = nextDisabled;
+
+                    if (journeySteps[journeyState.currentStepIndex + 1] === 'results') {
+                        newNextBtn.textContent = 'مشاهده تحلیل';
+                    } else if (journeySteps[journeyState.currentStepIndex + 1] === 'personalization') {
+                        newNextBtn.textContent = 'شخصی‌سازی رایحه';
+                    } else if (journeySteps[journeyState.currentStepIndex + 1] === 'final_offer') {
+                        newNextBtn.textContent = 'تایید و ادامه';
+                    } else {
+                        newNextBtn.textContent = 'بعدی';
+                    }
+
+                    newNextBtn.addEventListener('click', () => {
+                        if (newNextBtn.disabled) return;
+                        if (journeyState.currentStepIndex < journeySteps.length - 1) {
+                            journeyState.currentStepIndex++;
+                            renderJourneyStep();
+                        }
+                    });
+
+                    newPrevBtn.addEventListener('click', () => {
+                        if (journeyState.currentStepIndex > 0) {
+                            journeyState.currentStepIndex--;
+                            renderJourneyStep();
+                        }
+                    });
                 }
             }
-
-            nextBtn.addEventListener('click', () => {
-                if (nextBtn.disabled) return;
-                if (journeyState.currentStepIndex < journeySteps.length - 1) {
-                    journeyState.currentStepIndex++;
-                    renderJourneyStep();
-                }
-            });
-
-            prevBtn.addEventListener('click', () => {
-                if (journeyState.currentStepIndex > 0) {
-                    journeyState.currentStepIndex--;
-                    renderJourneyStep();
-                }
-            });
             
             // --- Smooth scrolling for anchor links ---
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
