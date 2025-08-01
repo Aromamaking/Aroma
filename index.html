@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آروما - هویت بویایی خود را کشف کنید</title>
+    <title>آروما - سفر بویایی خود را آغاز کنید</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,7 +12,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" xintegrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Custom Styles -->
     <style>
         body {
@@ -22,6 +26,9 @@
         }
         .font-vazir {
             font-family: 'Vazirmatn', sans-serif;
+        }
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
         }
         .hero-bg {
             background-image: linear-gradient(to bottom, rgba(2, 44, 34, 0.8), rgba(2, 44, 34, 1)), url('https://images.unsplash.com/photo-1585399001829-d84c6d75b858?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
@@ -47,6 +54,33 @@
             background-color: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(5px);
         }
+        .visual-option {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .visual-option:hover {
+            transform: scale(1.05);
+        }
+        .visual-option.selected {
+            box-shadow: 0 0 0 4px #D4AF37;
+            transform: scale(1.05);
+        }
+        .note-checkbox:checked + label {
+            border-color: #D4AF37;
+            background-color: #047857; /* Emerald 700 */
+        }
+        .note-checkbox:disabled + label {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .validation-error {
+            box-shadow: 0 0 0 2px #ef4444; /* Red-500 */
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
@@ -67,15 +101,30 @@
 
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-emerald-950 bg-opacity-80 backdrop-blur-sm shadow-md">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-white tracking-wider">آروما</h1>
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- SVG Logo -->
+            <a href="#home" class="flex items-center">
+                <svg width="150" height="50" viewBox="0 0 150 50" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#EACD65;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M25 45 C 15 45, 10 35, 10 25 C 10 15, 15 5, 25 5 C 35 5, 40 15, 40 25 C 40 35, 35 45, 25 45 Z" fill="#000"/>
+                    <path d="M25,10 C 22,10 20,12 20,15 C 20,20 22,22 25,28 C 28,22 30,20 30,15 C 30,12 28,10 25,10 Z M25,16 C 24,16 23.5,16.5 23.5,17.5 C 23.5,19 25,21 25,21 C 25,21 26.5,19 26.5,17.5 C 26.5,16.5 26,16 25,16 Z" fill="url(#goldGradient)"/>
+                    <path d="M20,28 C 18,30 18,35 22,38 L 28,38 C 32,35 32,30 30,28 L 25,32 L 20,28 Z" fill="url(#goldGradient)"/>
+                    <text x="55" y="28" class="font-cinzel" font-size="18" fill="white" font-weight="bold">AROMA</text>
+                    <text x="55" y="42" class="font-cinzel" font-size="8" fill="#D4AF37" letter-spacing="1">PERFUME STORE</text>
+                </svg>
+            </a>
             <nav class="hidden md:flex space-x-8 space-x-reverse text-lg">
-                <a href="#how-it-works" class="text-gray-300 hover:text-white transition">چگونه کار می‌کند؟</a>
                 <a href="#philosophy" class="text-gray-300 hover:text-white transition">فلسفه ما</a>
                 <a href="#kits" class="text-gray-300 hover:text-white transition">کیت‌ها</a>
+                <a href="#contact" class="text-gray-300 hover:text-white transition">تماس با ما</a>
             </nav>
-            <button id="startQuizBtnHeader" class="btn-primary font-bold py-2 px-6 rounded-lg text-lg">
-                شروع آزمون
+            <button id="startJourneyBtnHeader" class="btn-primary font-bold py-2 px-6 rounded-lg text-lg">
+                شروع سفر
             </button>
         </div>
     </header>
@@ -84,43 +133,19 @@
     <main id="home" class="hero-bg pt-32 pb-20">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-6xl font-bold text-white leading-tight mb-4">
-                آرکتایپ رایحه خود را کشف کنید
+                سفر بویایی خود را آغاز کنید
             </h2>
             <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                با یک آزمون روانشناسی معتبر، عطری را بیابید که بازتابی از عمیق‌ترین لایه‌های شخصیت شماست.
+                با یک تجربه یکپارچه، رایحه‌ای را کشف و خلق کنید که بازتابی از عمیق‌ترین لایه‌های شخصیت شماست.
             </p>
-            <button id="startQuizBtnHero" class="btn-primary font-bold py-4 px-10 rounded-lg text-xl">
-                آزمون کشف آرکتایپ
+            <button id="startJourneyBtnHero" class="btn-primary font-bold py-4 px-10 rounded-lg text-xl">
+                شروع سفر بویایی من
             </button>
         </div>
     </main>
-
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="py-20 bg-emerald-950">
-        <div class="container mx-auto px-6">
-            <h3 class="text-3xl font-bold text-center mb-12 text-white">سفر شما در دنیای آروما</h3>
-            <div class="grid md:grid-cols-3 gap-10 text-center">
-                <div class="card p-8 rounded-xl transform hover:scale-105 transition-transform duration-300">
-                    <div class="flex justify-center mb-4"><div class="bg-emerald-800 p-4 rounded-full"><svg class="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg></div></div>
-                    <h4 class="text-2xl font-bold mb-2 text-white">۱. تحلیل شخصیت</h4>
-                    <p class="text-gray-300">به سوالات تصویری و موقعیتی ما پاسخ دهید تا آرکتایپ شخصیتی شما را تحلیل کنیم.</p>
-                </div>
-                <div class="card p-8 rounded-xl transform hover:scale-105 transition-transform duration-300">
-                     <div class="flex justify-center mb-4"><div class="bg-emerald-800 p-4 rounded-full"><svg class="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg></div></div>
-                    <h4 class="text-2xl font-bold mb-2 text-white">۲. دریافت کیت</h4>
-                    <p class="text-gray-300">هوش مصنوعی ما یک «کیت کشف» حاوی رایحه‌های متناسب با آرکتایپ شما را پیشنهاد می‌دهد.</p>
-                </div>
-                <div class="card p-8 rounded-xl transform hover:scale-105 transition-transform duration-300">
-                     <div class="flex justify-center mb-4"><div class="bg-emerald-800 p-4 rounded-full"><svg class="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div></div>
-                    <h4 class="text-2xl font-bold mb-2 text-white">۳. کشف هویت بویایی</h4>
-                    <p class="text-gray-300">رایحه‌ها را امتحان کرده و عطر امضای خود را برای خرید بطری کامل انتخاب نمایید.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- Philosophy Section -->
-    <section id="philosophy" class="py-20">
+    <section id="philosophy" class="py-20 bg-emerald-950">
         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
             <div class="md:w-1/2">
                 <img src="https://images.unsplash.com/photo-1620916566398-39f168a27e20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="فلسفه آروما - عطرسازی هنرمندانه" class="rounded-xl shadow-lg w-full">
@@ -131,20 +156,20 @@
                     ما در آروما باور داریم که انتخاب عطر، یک تصمیم عمیقاً شخصی است. حس بویایی به طور مستقیم با حافظه و احساسات ما در ارتباط است. به همین دلیل، ما از روانشناسی و هوش مصنوعی بهره می‌بریم تا پلی میان شخصیت درونی شما و دنیای پیچیده‌ی رایحه‌ها بسازیم.
                 </p>
                 <p class="text-lg text-gray-300 leading-relaxed">
-                    هدف ما فراتر از فروش عطر است؛ ما به شما کمک می‌کنیم تا بخشی از هویت خود را که تا کنون پنهان مانده بود، کشف کنید.
+                    هدف ما فراتر از فروش عطر است؛ ما شما را به سفری برای کشف و خلق بخشی از هویت پنهان خود دعوت می‌کنیم.
                 </p>
             </div>
         </div>
     </section>
 
     <!-- Featured Kits Section -->
-    <section id="kits" class="py-20 bg-emerald-950">
+    <section id="kits" class="py-20">
         <div class="container mx-auto px-6">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">کیت‌های کشف بر اساس آرکتایپ</h3>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Kit 1 -->
                 <div class="card rounded-xl overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1617195822398-71329a36b176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="کیت حاکم" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <img src="https://images.unsplash.com/photo-1555952494-0357e8ab9e56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="کیت حاکم" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
                     <div class="p-6">
                         <h4 class="text-2xl font-bold text-white mb-2">کیت حاکم</h4>
                         <p class="text-gray-300">رایحه‌های چوبی و چرمی برای شخصیتی قدرتمند و با اعتماد به نفس.</p>
@@ -152,7 +177,7 @@
                 </div>
                 <!-- Kit 2 -->
                 <div class="card rounded-xl overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1598202092283-75b9f151a65d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="کیت عاشق" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <img src="https://images.unsplash.com/photo-1567602234599-65de43c751b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="کیت عاشق" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
                     <div class="p-6">
                         <h4 class="text-2xl font-bold text-white mb-2">کیت عاشق</h4>
                         <p class="text-gray-300">عطرهای گلی و شیرین برای روحیه‌ای لطیف، صمیمی و سرشار از احساس.</p>
@@ -160,7 +185,7 @@
                 </div>
                 <!-- Kit 3 -->
                 <div class="card rounded-xl overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1600950335862-34998a432471?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="کیت جستجوگر" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <img src="https://images.unsplash.com/photo-1508921340878-ba53e1f416ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="کیت جستجوگر" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
                     <div class="p-6">
                         <h4 class="text-2xl font-bold text-white mb-2">کیت جستجوگر</h4>
                         <p class="text-gray-300">نت‌های مرکباتی و تازه برای شخصیتی پویا، نوآور و عاشق تجربه.</p>
@@ -168,7 +193,7 @@
                 </div>
                 <!-- Kit 4 -->
                 <div class="card rounded-xl overflow-hidden group">
-                    <img src="https://images.unsplash.com/photo-1594035918253-8a3a0b3bb875?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="کیت خالق" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <img src="https://images.unsplash.com/photo-1512413316925-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="کیت خالق" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
                     <div class="p-6">
                         <h4 class="text-2xl font-bold text-white mb-2">کیت خالق</h4>
                         <p class="text-gray-300">رایحه‌های غیرمعمول و هنری برای روحیه‌ای ساختارشکن و منحصربه‌فرد.</p>
@@ -179,108 +204,88 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-emerald-950 py-10">
-        <div class="container mx-auto px-6 text-center text-gray-400">
-            <p>&copy; 1403 (2024) | تمامی حقوق برای برند آروما محفوظ است.</p>
-            <p class="mt-2">طراحی شده برای کشف بهترین نسخه از شما.</p>
+    <footer id="contact" class="bg-emerald-950 py-10 border-t border-emerald-900">
+        <div class="container mx-auto px-6 text-center text-gray-300">
+            <div class="mb-8 flex flex-col items-center">
+                 <!-- SVG Logo in Footer -->
+                <svg width="200" height="60" viewBox="0 0 150 50" xmlns="http://www.w3.org/2000/svg" class="mb-6">
+                     <defs>
+                        <linearGradient id="goldGradientFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#EACD65;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M25 45 C 15 45, 10 35, 10 25 C 10 15, 15 5, 25 5 C 35 5, 40 15, 40 25 C 40 35, 35 45, 25 45 Z" fill="#000"/>
+                    <path d="M25,10 C 22,10 20,12 20,15 C 20,20 22,22 25,28 C 28,22 30,20 30,15 C 30,12 28,10 25,10 Z M25,16 C 24,16 23.5,16.5 23.5,17.5 C 23.5,19 25,21 25,21 C 25,21 26.5,19 26.5,17.5 C 26.5,16.5 26,16 25,16 Z" fill="url(#goldGradientFooter)"/>
+                    <path d="M20,28 C 18,30 18,35 22,38 L 28,38 C 32,35 32,30 30,28 L 25,32 L 20,28 Z" fill="url(#goldGradientFooter)"/>
+                    <text x="55" y="28" class="font-cinzel" font-size="18" fill="white" font-weight="bold">AROMA</text>
+                    <text x="55" y="42" class="font-cinzel" font-size="8" fill="#D4AF37" letter-spacing="1">PERFUME STORE</text>
+                </svg>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 text-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-location-dot text-yellow-400"></i>
+                        <span>قم، سالاریه، میدان میثم، مجتمع عصر جدید، طبقه همکف، پلاک G203</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-phone text-yellow-400"></i>
+                        <a href="tel:09045353643" class="hover:text-white" dir="ltr">0904 535 3643</a>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center gap-8 mt-6 text-3xl">
+                    <a href="https://instagram.com/aroma_making" target="_blank" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://wa.me/989126521596" target="_blank" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://t.me/amiraroma" target="_blank" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-emerald-800 pt-6">
+                <p>&copy; 1403 (2024) | تمامی حقوق برای برند آروما محفوظ است.</p>
+                <p class="mt-2 text-sm text-gray-500">طرح مفهومی و پلتفرم دیجیتال ارائه شده توسط مشاور شما</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Quiz Modal -->
-    <div id="quizModal" class="fixed inset-0 z-50 items-center justify-center modal-backdrop hidden">
-        <div id="quizContainer" class="card rounded-2xl shadow-2xl w-11/12 md:w-3/4 lg:w-2/3 max-w-5xl max-h-[90vh] flex flex-col transform transition-all duration-300 scale-95 opacity-0">
+    <!-- Journey Modal -->
+    <div id="journeyModal" class="fixed inset-0 z-50 items-center justify-center modal-backdrop hidden">
+        <div id="journeyContainer" class="card rounded-2xl shadow-2xl w-11/12 md:w-3/4 lg:w-2/3 max-w-5xl max-h-[90vh] flex flex-col transform transition-all duration-300 scale-95 opacity-0">
             <div class="p-4 border-b border-emerald-800 flex justify-between items-center">
-                <h3 class="text-2xl font-bold text-white">آزمون کشف آرکتایپ رایحه</h3>
-                <button id="closeQuizBtn" class="text-gray-300 hover:text-white text-3xl">&times;</button>
+                <h3 id="journeyTitle" class="text-2xl font-bold text-white">سفر بویایی شما</h3>
+                <button id="closeJourneyBtn" class="text-gray-300 hover:text-white text-3xl">&times;</button>
             </div>
-            <div id="quizContent" class="p-6 md:p-8 overflow-y-auto">
-                <!-- Quiz steps will be injected here by JavaScript -->
+            <div id="journeyContent" class="p-6 md:p-8 overflow-y-auto flex-grow">
+                <!-- Journey steps will be injected here by JavaScript -->
             </div>
-            <div class="p-4 border-t border-emerald-800 flex justify-between items-center">
+            <div id="journeyFooter" class="p-4 border-t border-emerald-800 flex justify-between items-center">
                 <button id="prevBtn" class="bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-emerald-600 transition disabled:opacity-50 disabled:cursor-not-allowed">قبلی</button>
                 <div id="stepIndicator" class="text-gray-400"></div>
                 <button id="nextBtn" class="btn-primary font-bold py-2 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">بعدی</button>
             </div>
         </div>
     </div>
-    
-    <!-- Results Modal -->
-    <div id="resultsModal" class="fixed inset-0 z-50 items-center justify-center modal-backdrop hidden">
-        <div id="resultsContainer" class="card rounded-2xl shadow-2xl w-11/12 md:w-2/3 lg:w-1/2 max-w-4xl max-h-[90vh] flex flex-col transform transition-all duration-300 scale-95 opacity-0">
-            <div class="p-4 border-b border-emerald-800 flex justify-between items-center">
-                <h3 class="text-2xl font-bold text-white">تحلیل شخصیت بویایی شما</h3>
-                <button id="closeResultsBtn" class="text-gray-300 hover:text-white text-3xl">&times;</button>
-            </div>
-            <div id="resultsContent" class="p-6 md:p-8 overflow-y-auto text-center">
-                <!-- Results will be injected here by JavaScript -->
-            </div>
-             <div class="p-4 border-t border-emerald-800 text-center">
-                <button id="restartQuizBtn" class="bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-emerald-600 transition">انجام دوباره آزمون</button>
-            </div>
-        </div>
-    </div>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Modal Handling ---
-            const quizModal = document.getElementById('quizModal');
-            const quizContainer = document.getElementById('quizContainer');
-            const resultsModal = document.getElementById('resultsModal');
-            const resultsContainer = document.getElementById('resultsContainer');
-
-            const openQuizModal = () => {
-                quizModal.classList.remove('hidden');
-                quizModal.classList.add('flex');
-                setTimeout(() => {
-                    quizContainer.classList.remove('scale-95', 'opacity-0');
-                }, 10);
-                renderStep();
-            };
-
-            const closeQuizModal = () => {
-                quizContainer.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => {
-                    quizModal.classList.add('hidden');
-                    quizModal.classList.remove('flex');
-                    resetQuiz();
-                }, 300);
-            };
-            
-            const openResultsModal = () => {
-                resultsModal.classList.remove('hidden');
-                resultsModal.classList.add('flex');
-                setTimeout(() => {
-                    resultsContainer.classList.remove('scale-95', 'opacity-0');
-                }, 10);
-            };
-
-            const closeResultsModal = () => {
-                resultsContainer.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => {
-                    resultsModal.classList.add('hidden');
-                    resultsModal.classList.remove('flex');
-                }, 300);
-            };
-
-            document.getElementById('startQuizBtnHeader').addEventListener('click', openQuizModal);
-            document.getElementById('startQuizBtnHero').addEventListener('click', openQuizModal);
-            document.getElementById('closeQuizBtn').addEventListener('click', closeQuizModal);
-            document.getElementById('closeResultsBtn').addEventListener('click', closeResultsModal);
-            
-            document.getElementById('restartQuizBtn').addEventListener('click', () => {
-                closeResultsModal();
-                setTimeout(openQuizModal, 350);
-            });
-
-            // --- Quiz Logic ---
-            const quizContent = document.getElementById('quizContent');
+            // --- Elements ---
+            const journeyModal = document.getElementById('journeyModal');
+            const journeyContainer = document.getElementById('journeyContainer');
+            const journeyTitle = document.getElementById('journeyTitle');
+            const journeyContent = document.getElementById('journeyContent');
+            const journeyFooter = document.getElementById('journeyFooter');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
             const stepIndicator = document.getElementById('stepIndicator');
 
+            // --- Journey State ---
+            let journeyState = {};
+
+            const journeySteps = [
+                'quiz_1', 'quiz_2', 'quiz_3', 'quiz_4', 
+                'results', 
+                'personalization', 
+                'final_offer'
+            ];
+
             const questions = [
-                {
+                 {
                     type: 'visual',
                     question: "کدام یک از این فضاها بیشتر به شما حس تعلق می‌دهد؟",
                     options: [
@@ -322,148 +327,164 @@
                 }
             ];
 
-            let currentStep = 0;
-            let answers = {};
+            const notesData = {
+                top: [
+                    { id: 'top1', name: 'ترنج' }, { id: 'top2', name: 'لیموترش' }, { id: 'top3', name: 'پرتقال' }, { id: 'top4', name: 'نارنگی ماندارین' },
+                    { id: 'top5', name: 'گریپ فروت' }, { id: 'top6', name: 'اسطوخودوس' }, { id: 'top7', name: 'نعناع' }, { id: 'top8', name: 'آناناس' },
+                    { id: 'top9', name: 'انگور فرنگی سیاه' }, { id: 'top10', name: 'سیب' }, { id: 'top11', name: 'هندوانه' }, { id: 'top12', name: 'آب دریا' },
+                    { id: 'top13', name: 'فلفل صورتی' }, { id: 'top14', name: 'هل' }, { id: 'top15', name: 'جوز' }, { id: 'top16', name: 'زعفران' }
+                ],
+                middle: [
+                    { id: 'mid1', name: 'رز' }, { id: 'mid2', name: 'یاس' }, { id: 'mid3', name: 'شمعدانی' }, { id: 'mid4', name: 'بهار نارنج' },
+                    { id: 'mid5', name: 'شکوفه پرتقال' }, { id: 'mid6', name: 'زنبق' }, { id: 'mid7', name: 'بنفشه' }, { id: 'mid8', name: 'گل مریم' },
+                    { id: 'mid9', name: 'ارکیده' }, { id: 'mid10', name: 'دارچین' }, { id: 'mid11', name: 'فلفل سیاه' }, { id: 'mid12', name: 'قهوه' },
+                    { id: 'mid13', name: 'چای' }, { id: 'mid14', name: 'روایح دودی' }, { id: 'mid15', name: 'تنباکو' }, { id: 'mid16', name: 'جیر' }
+                ],
+                base: [
+                    { id: 'base1', name: 'چوب صندل' }, { id: 'base2', name: 'چوب سدر' }, { id: 'base3', name: 'عود' }, { id: 'base4', name: 'پچولی (نعناع هندی)' },
+                    { id: 'base5', name: 'خس خس (وتیور)' }, { id: 'base6', name: 'مشک' }, { id: 'base7', name: 'کهربا' }, { id: 'base8', name: 'وانیل' },
+                    { id: 'base9', name: 'دانه تونکا' }, { id: 'base10', name: 'چرم' }, { id: 'base11', name: 'خزه بلوط' }, { id: 'base12', name: 'لابدانیوم' }
+                ]
+            };
 
-            const renderStep = () => {
-                const stepData = questions[currentStep];
+            const archetypeData = {
+                ruler: {
+                    title: "آرکتایپ حاکم",
+                    explanation: "انتخاب شما برای فضاهای کلاسیک و تمرکزتان بر موفقیت و استراتژی، نشان‌دهنده شخصیتی قدرتمند، منظم و با اعتماد به نفس است. شما به کیفیت، کنترل و ساختارهای پایدار اهمیت می‌دهید.",
+                    fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که حس قدرت و وقار را منتقل می‌کنند. نت‌های سنگین، چوبی، چرمی و ادویه‌ای با روحیه شما همخوانی کامل دارند.",
+                    recommendedNotes: { top: ['زعفران'], middle: ['جیر', 'روایح دودی'], base: ['چوب سدر', 'چرم'] }
+                },
+                creator: {
+                    title: "آرکتایپ خالق",
+                    explanation: "انتخاب شما برای فضاهای هنری و تمایلتان به پروژه‌های خلاقانه، نشان‌دهنده روحیه‌ای نوآور، مستقل و دارای اصالت است. شما از ساختن چیزهای جدید و بیان خود به شیوه‌ای منحصربه‌فرد لذت می‌برید.",
+                    fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که ساختارشکن و غیرمنتظره هستند. نت‌های سبز، معدنی، و ترکیبات غیرمعمول، با روحیه شما همخوانی دارند.",
+                    recommendedNotes: { top: ['گریپ فروت', 'فلفل صورتی'], middle: ['زنبق', 'شمعدانی'], base: ['خس خس (وتیور)', 'پچولی (نعناع هندی)'] }
+                },
+                lover: {
+                    title: "آرکتایپ عاشق",
+                    explanation: "انتخاب شما برای فضاهای گرم و صمیمی و تمرکزتان بر اشتیاق و روابط، نشان‌دهنده شخصیتی احساسی، خونگرم و اجتماعی است. شما برای زیبایی، هماهنگی و ارتباطات عمیق ارزش قائل هستید.",
+                    fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که حس صمیمیت، جذابیت و لطافت را القا می‌کنند. نت‌های گلی، شیرین، میوه‌ای و شرقی با روحیه شما همخوانی دارند.",
+                    recommendedNotes: { top: ['ترنج'], middle: ['رز', 'یاس', 'بهار نارنج'], base: ['وانیل', 'مشک'] }
+                },
+                explorer: {
+                    title: "آرکتایپ جستجوگر",
+                    explanation: "انتخاب شما برای فضاهای باز و بکر و تمرکزتان بر آزادی و کشف، نشان‌دهنده شخصیتی ماجراجو، مستقل و پرانرژی است. شما از تجربه کردن، یادگیری و شکستن مرزها لذت می‌برید.",
+                    fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که حس طراوت، سرزندگی و آزادی را منتقل می‌کنند. نت‌های مرکباتی، آروماتیک، دریایی و سبز با روحیه شما همخوانی دارند.",
+                    recommendedNotes: { top: ['لیموترش', 'آب دریا'], middle: ['اسطوخودوس', 'چای'], base: ['خزه بلوط', 'کهربا'] }
+                }
+            };
+            
+            function resetJourney() {
+                journeyState = {
+                    currentStepIndex: 0,
+                    answers: {},
+                    archetype: null,
+                    selectedNotes: { top: [], middle: [], base: [] },
+                    perfumeName: ''
+                };
+            }
+
+            function openJourneyModal() {
+                resetJourney();
+                journeyModal.classList.remove('hidden');
+                journeyModal.classList.add('flex');
+                setTimeout(() => {
+                    journeyContainer.classList.remove('scale-95', 'opacity-0');
+                }, 10);
+                renderJourneyStep();
+            }
+
+            function closeJourneyModal() {
+                journeyContainer.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    journeyModal.classList.add('hidden');
+                    journeyModal.classList.remove('flex');
+                }, 300);
+            }
+
+            document.getElementById('startJourneyBtnHeader').addEventListener('click', openJourneyModal);
+            document.getElementById('startJourneyBtnHero').addEventListener('click', openJourneyModal);
+            document.getElementById('closeJourneyBtn').addEventListener('click', closeJourneyModal);
+
+            function renderJourneyStep() {
+                const stepId = journeySteps[journeyState.currentStepIndex];
+                journeyContent.innerHTML = ''; // Clear previous content
+                
+                // Scroll to top of content area on step change
+                journeyContent.scrollTop = 0;
+
+                if (stepId.startsWith('quiz')) {
+                    renderQuizStep();
+                } else if (stepId === 'results') {
+                    renderResultsStep();
+                } else if (stepId === 'personalization') {
+                    renderPersonalizationStep();
+                } else if (stepId === 'final_offer') {
+                    renderFinalOfferStep();
+                }
+                updateJourneyUI();
+            }
+            
+            function renderQuizStep() {
+                const questionIndex = parseInt(journeyState.currentStepIndex);
+                const stepData = questions[questionIndex];
                 let contentHtml = '';
 
                 if (stepData.type === 'visual') {
-                    const optionsHtml = stepData.options.map((opt, index) => `
-                        <div class="cursor-pointer visual-option rounded-lg overflow-hidden ${answers[currentStep] === opt.value ? 'selected' : ''}" data-value="${opt.value}">
+                    const optionsHtml = stepData.options.map((opt) => `
+                        <div class="cursor-pointer visual-option rounded-lg overflow-hidden ${journeyState.answers[questionIndex] === opt.value ? 'selected' : ''}" data-value="${opt.value}">
                             <img src="${opt.image}" alt="${opt.alt}" class="w-full h-40 md:h-48 object-cover">
                         </div>
                     `).join('');
                     contentHtml = `<div class="grid grid-cols-2 md:grid-cols-4 gap-4">${optionsHtml}</div>`;
-                } else { // type 'text'
-                    const optionsHtml = stepData.options.map((opt, index) => `
-                        <label class="block card p-4 rounded-lg cursor-pointer hover:bg-emerald-800 transition border-2 ${answers[currentStep] === opt.value ? 'border-yellow-400' : 'border-transparent'}">
-                            <input type="radio" name="q${currentStep}" value="${opt.value}" class="hidden" ${answers[currentStep] === opt.value ? 'checked' : ''}>
+                } else {
+                    const optionsHtml = stepData.options.map((opt) => `
+                        <label class="block card p-4 rounded-lg cursor-pointer hover:bg-emerald-800 transition border-2 ${journeyState.answers[questionIndex] === opt.value ? 'border-yellow-400' : 'border-transparent'}">
+                            <input type="radio" name="q${questionIndex}" value="${opt.value}" class="hidden" ${journeyState.answers[questionIndex] === opt.value ? 'checked' : ''}>
                             <span class="text-lg">${opt.text}</span>
                         </label>
                     `).join('');
                     contentHtml = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">${optionsHtml}</div>`;
                 }
                 
-                quizContent.innerHTML = `
+                journeyContent.innerHTML = `
                     <h4 class="text-2xl font-bold mb-6 text-center text-white">${stepData.question}</h4>
                     ${contentHtml}
                 `;
                 
                 // Add event listeners
                 if (stepData.type === 'visual') {
-                    document.querySelectorAll('.visual-option').forEach(el => {
+                    journeyContent.querySelectorAll('.visual-option').forEach(el => {
                         el.addEventListener('click', (e) => {
-                            answers[currentStep] = e.currentTarget.dataset.value;
-                            renderStep();
+                            journeyState.answers[questionIndex] = e.currentTarget.dataset.value;
+                            renderJourneyStep();
                         });
                     });
                 } else {
-                    document.querySelectorAll(`input[name="q${currentStep}"]`).forEach(radio => {
+                    journeyContent.querySelectorAll(`input[name="q${questionIndex}"]`).forEach(radio => {
                         radio.addEventListener('change', (e) => {
-                            answers[currentStep] = e.target.value;
-                            renderStep();
+                            journeyState.answers[questionIndex] = e.target.value;
+                            renderJourneyStep();
                         });
                     });
                 }
-                
-                updateButtons();
-            };
-            
-            const updateButtons = () => {
-                stepIndicator.textContent = `مرحله ${currentStep + 1} از ${questions.length}`;
-                prevBtn.disabled = currentStep === 0;
-                
-                if (answers[currentStep] !== undefined) {
-                    nextBtn.disabled = false;
-                    nextBtn.classList.remove('disabled:opacity-50', 'disabled:cursor-not-allowed');
-                } else {
-                    nextBtn.disabled = true;
-                    nextBtn.classList.add('disabled:opacity-50', 'disabled:cursor-not-allowed');
-                }
+            }
 
-                if (currentStep === questions.length - 1) {
-                    nextBtn.textContent = 'مشاهده تحلیل';
-                } else {
-                    nextBtn.textContent = 'بعدی';
-                }
-            };
-
-            nextBtn.addEventListener('click', () => {
-                if (nextBtn.disabled) return;
-                if (currentStep < questions.length - 1) {
-                    currentStep++;
-                    renderStep();
-                } else {
-                    calculateResults();
-                    closeQuizModal();
-                    setTimeout(openResultsModal, 350);
-                }
-            });
-
-            prevBtn.addEventListener('click', () => {
-                if (currentStep > 0) {
-                    currentStep--;
-                    renderStep();
-                }
-            });
-            
-            const resetQuiz = () => {
-                currentStep = 0;
-                answers = {};
-            };
-
-            const calculateResults = () => {
+            function renderResultsStep() {
                 const scores = { ruler: 0, creator: 0, lover: 0, explorer: 0 };
-                for(const step in answers) {
-                    scores[answers[step]]++;
+                for(const step in journeyState.answers) {
+                    scores[journeyState.answers[step]]++;
                 }
-                const dominantArchetype = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
-                displayResults(dominantArchetype);
-            };
-            
-            const displayResults = (archetype) => {
-                const resultsData = {
-                    ruler: {
-                        title: "آرکتایپ حاکم",
-                        explanation: "انتخاب شما برای فضاهای کلاسیک و تمرکزتان بر موفقیت و استراتژی، نشان‌دهنده شخصیتی قدرتمند، منظم و با اعتماد به نفس است. شما به کیفیت، کنترل و ساختارهای پایدار اهمیت می‌دهید.",
-                        fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که حس قدرت و وقار را منتقل می‌کنند. نت‌های سنگین، چوبی، چرمی و ادویه‌ای با روحیه شما همخوانی کامل دارند.",
-                        kitName: "کیت کشف حاکم",
-                        kitImage: "https://images.unsplash.com/photo-1617195822398-71329a36b176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-                        kitPerfumes: ['عطر چوبی "اعتبار"', 'عطر چرمی "میراث"', 'عطر ادویه‌ای "اقتدار"']
-                    },
-                    creator: {
-                        title: "آرکتایپ خالق",
-                        explanation: "انتخاب شما برای فضاهای هنری و تمایلتان به پروژه‌های خلاقانه، نشان‌دهنده روحیه‌ای نوآور، مستقل و دارای اصالت است. شما از ساختن چیزهای جدید و بیان خود به شیوه‌ای منحصربه‌فرد لذت می‌برید.",
-                        fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که ساختارشکن و غیرمنتظره هستند. نت‌های سبز، معدنی، آلدهیدی و ترکیبات غیرمعمول، با روحیه شما همخوانی دارند.",
-                        kitName: "کیت کشف خالق",
-                        kitImage: "https://images.unsplash.com/photo-1594035918253-8a3a0b3bb875?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-                        kitPerfumes: ['عطر آلدهیدی "تابو شکن"', 'عطر سبز "بکر"', 'عطر معدنی "امضا"']
-                    },
-                    lover: {
-                        title: "آرکتایپ عاشق",
-                        explanation: "انتخاب شما برای فضاهای گرم و صمیمی و تمرکزتان بر اشتیاق و روابط، نشان‌دهنده شخصیتی احساسی، خونگرم و اجتماعی است. شما برای زیبایی، هماهنگی و ارتباطات عمیق ارزش قائل هستید.",
-                        fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که حس صمیمیت، جذابیت و لطافت را القا می‌کنند. نت‌های گلی، شیرین، میوه‌ای و شرقی با روحیه شما همخوانی دارند.",
-                        kitName: "کیت کشف عاشق",
-                        kitImage: "https://images.unsplash.com/photo-1598202092283-75b9f151a65d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-                        kitPerfumes: ['عطر گلی "باغ مخفی"', 'عطر شرقی "شیدایی"', 'عطر وانیلی "آغوش گرم"']
-                    },
-                    explorer: {
-                        title: "آرکتایپ جستجوگر",
-                        explanation: "انتخاب شما برای فضاهای باز و بکر و تمرکزتان بر آزادی و کشف، نشان‌دهنده شخصیتی ماجراجو، مستقل و پرانرژی است. شما از تجربه کردن، یادگیری و شکستن مرزها لذت می‌برید.",
-                        fragranceLink: "این پروفایل شخصیتی، معمولاً جذب رایحه‌هایی می‌شود که حس طراوت، سرزندگی و آزادی را منتقل می‌کنند. نت‌های مرکباتی، آروماتیک، دریایی و سبز با روحیه شما همخوانی دارند.",
-                        kitName: "کیت کشف جستجوگر",
-                        kitImage: "https://images.unsplash.com/photo-1600950335862-34998a432471?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-                        kitPerfumes: ['عطر مرکباتی "نسیم سحر"', 'عطر دریایی "اقیانوس"', 'عطر آروماتیک "اوج"']
-                    }
-                };
+                journeyState.archetype = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+                
+                const result = archetypeData[journeyState.archetype];
+                
+                // Pre-populate selected notes for next step
+                journeyState.selectedNotes = JSON.parse(JSON.stringify(result.recommendedNotes));
 
-                const result = resultsData[archetype];
-                const resultsContent = document.getElementById('resultsContent');
-                resultsContent.innerHTML = `
+                journeyContent.innerHTML = `
                     <div class="animate-fade-in text-right">
-                        <p class="text-xl text-yellow-400 mb-2">آرکتایپ بویایی شما:</p>
+                        <p class="text-xl text-yellow-400 mb-2">مرحله ۱: تحلیل شخصیت شما</p>
                         <h4 class="text-4xl font-bold text-white mb-4">${result.title}</h4>
                         
                         <div class="border-t border-b border-emerald-800 py-4 my-4">
@@ -472,27 +493,167 @@
                         </div>
 
                         <div class="border-b border-emerald-800 py-4 my-4">
-                            <h5 class="text-xl font-bold text-white mb-2">پیوند با رایحه:</h5>
+                            <h5 class="text-xl font-bold text-white mb-2">نت‌های پیشنهادی برای شما:</h5>
                             <p class="text-lg text-gray-300">${result.fragranceLink}</p>
-                        </div>
-                        
-                        <div class="bg-emerald-900 p-6 rounded-xl max-w-md mx-auto mt-8 text-center">
-                            <h5 class="text-2xl font-bold text-white mb-4">کیت کشف پیشنهادی شما:</h5>
-                            <img src="${result.kitImage}" alt="${result.kitName}" class="rounded-lg mb-4 w-full h-48 object-cover">
-                            <h6 class="text-xl font-bold text-white">${result.kitName}</h6>
-                            <p class="text-gray-400 mt-2 mb-4">شامل نمونه‌هایی از عطرهای زیر:</p>
-                            <ul class="text-gray-300 list-none space-y-1">
-                                ${result.kitPerfumes.map(p => `<li>${p}</li>`).join('')}
-                            </ul>
-                            <button class="btn-primary font-bold py-3 px-8 rounded-lg text-lg mt-6 w-full">
-                                افزودن کیت به سبد خرید
-                            </button>
                         </div>
                     </div>
                 `;
-            };
+            }
+
+            function renderPersonalizationStep() {
+                const limits = { top: 2, middle: 3, base: 2 };
+
+                const generateNotesHTML = (category) => {
+                    return notesData[category].map(note => {
+                        const isChecked = journeyState.selectedNotes[category].includes(note.name);
+                        const isDisabled = !isChecked && journeyState.selectedNotes[category].length >= limits[category];
+                        return `
+                            <div>
+                                <input type="checkbox" id="${note.id}" name="${category}" value="${note.name}" class="hidden note-checkbox" ${isChecked ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}>
+                                <label for="${note.id}" class="block text-center cursor-pointer p-3 rounded-lg border-2 border-emerald-700 hover:border-yellow-400 transition-colors duration-200">
+                                    ${note.name}
+                                </label>
+                            </div>
+                        `;
+                    }).join('');
+                };
+
+                const updateSummaryHTML = () => {
+                    let summaryHtml = '';
+                    for (const category in journeyState.selectedNotes) {
+                        const notes = journeyState.selectedNotes[category];
+                        summaryHtml += `
+                            <div>
+                                <h5 class="font-bold text-yellow-400 mb-2 capitalize">${category === 'top' ? 'آغازی' : (category === 'middle' ? 'میانی' : 'پایانی')}:</h5>
+                                <div id="summary-${category}" class="text-gray-300 min-h-[50px]">
+                                    ${notes.length > 0 ? notes.map(note => `<span class="inline-block bg-emerald-800 rounded-full px-3 py-1 text-sm font-semibold text-gray-200 mr-2 mb-2">${note}</span>`).join('') : '<span class="text-gray-500">...</span>'}
+                                </div>
+                            </div>
+                        `;
+                    }
+                    return summaryHtml;
+                };
+
+                journeyContent.innerHTML = `
+                    <h3 class="text-2xl font-bold text-center mb-4 text-white">مرحله ۲: شخصی‌سازی رایحه</h3>
+                    <p class="text-md text-gray-300 text-center mb-8 max-w-2xl mx-auto">
+                        نت‌های پیشنهادی ما برای شما انتخاب شده‌اند. می‌توانید آن‌ها را ویرایش کرده یا ترکیب کاملاً جدیدی خلق کنید.
+                    </p>
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        <div class="card p-6 rounded-xl">
+                            <h4 class="text-xl font-bold text-yellow-400 border-b-2 border-yellow-400 pb-2 mb-4">نت‌های آغازی (حداکثر ${limits.top})</h4>
+                            <div class="space-y-3">${generateNotesHTML('top')}</div>
+                        </div>
+                        <div class="card p-6 rounded-xl">
+                            <h4 class="text-xl font-bold text-yellow-400 border-b-2 border-yellow-400 pb-2 mb-4">نت‌های میانی (حداکثر ${limits.middle})</h4>
+                            <div class="space-y-3">${generateNotesHTML('middle')}</div>
+                        </div>
+                        <div class="card p-6 rounded-xl">
+                            <h4 class="text-xl font-bold text-yellow-400 border-b-2 border-yellow-400 pb-2 mb-4">نت‌های پایانی (حداکثر ${limits.base})</h4>
+                            <div class="space-y-3">${generateNotesHTML('base')}</div>
+                        </div>
+                    </div>
+                     <div class="card mt-12 p-8 rounded-xl max-w-4xl mx-auto">
+                        <h4 class="text-2xl font-bold text-white mb-6 text-center">ترکیب نهایی شما</h4>
+                        <div class="grid md:grid-cols-3 gap-6 text-center mb-6">${updateSummaryHTML()}</div>
+                        <div class="mt-6">
+                            <input type="text" id="perfumeNameInput" placeholder="نام عطر خود را وارد کنید..." value="${journeyState.perfumeName}" class="w-full bg-emerald-800 border border-emerald-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-shadow">
+                        </div>
+                    </div>
+                `;
+
+                journeyContent.querySelectorAll('.note-checkbox').forEach(checkbox => {
+                    checkbox.addEventListener('change', (e) => {
+                        const category = e.target.name;
+                        const value = e.target.value;
+                        if (e.target.checked) {
+                            if (journeyState.selectedNotes[category].length < limits[category]) {
+                                journeyState.selectedNotes[category].push(value);
+                            }
+                        } else {
+                            journeyState.selectedNotes[category] = journeyState.selectedNotes[category].filter(note => note !== value);
+                        }
+                        renderPersonalizationStep(); // Re-render to update disabled states and summary
+                    });
+                });
+                
+                journeyContent.getElementById('perfumeNameInput').addEventListener('input', (e) => {
+                    journeyState.perfumeName = e.target.value;
+                    updateJourneyUI();
+                });
+            }
+
+            function renderFinalOfferStep() {
+                journeyContent.innerHTML = `
+                    <h3 class="text-2xl font-bold text-center mb-4 text-white">مرحله نهایی: عطر شما آماده است!</h3>
+                    <p class="text-md text-gray-300 text-center mb-8 max-w-2xl mx-auto">
+                        رایحه <strong class="text-yellow-400">"${journeyState.perfumeName}"</strong> بر اساس انتخاب شما طراحی شده است. حالا می‌توانید آن را تجربه کنید.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <div class="card p-8 rounded-xl flex flex-col items-center text-center border-2 border-transparent hover:border-yellow-400 transition">
+                            <h4 class="text-2xl font-bold text-white mb-4">گزینه ۱: کیت کشف</h4>
+                            <p class="text-gray-300 mb-6 flex-grow">یک کیت نمونه حاوی عطر شخصی‌سازی شده خودتان را دریافت کنید تا آن را روی پوست خود امتحان کرده و از انتخاب نهایی مطمئن شوید.</p>
+                            <button class="btn-primary font-bold py-3 px-8 rounded-lg text-lg w-full mt-4">سفارش کیت کشف</button>
+                        </div>
+                        <div class="card p-8 rounded-xl flex flex-col items-center text-center border-2 border-transparent hover:border-yellow-400 transition">
+                            <h4 class="text-2xl font-bold text-white mb-4">گزینه ۲: بطری کامل</h4>
+                            <p class="text-gray-300 mb-6 flex-grow">اگر از ترکیب خود مطمئن هستید، بطری کامل عطر منحصربه‌فرد خود را سفارش دهید و از خلق اثر هنری خود لذت ببرید.</p>
+                            <button class="bg-emerald-700 text-white font-bold py-3 px-8 rounded-lg text-lg w-full mt-4 hover:bg-emerald-600">سفارش بطری کامل</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function updateJourneyUI() {
+                const stepId = journeySteps[journeyState.currentStepIndex];
+                const totalQuizSteps = 4;
+                
+                // Title
+                journeyTitle.textContent = stepId.startsWith('quiz') ? `تحلیل شخصیت (${journeyState.currentStepIndex + 1}/${totalQuizSteps})` : 'سفر بویایی شما';
+                
+                // Footer visibility
+                journeyFooter.style.display = stepId === 'final_offer' ? 'none' : 'flex';
+
+                // Buttons
+                prevBtn.disabled = journeyState.currentStepIndex === 0;
+                
+                let nextDisabled = false;
+                if (stepId.startsWith('quiz')) {
+                    nextDisabled = journeyState.answers[journeyState.currentStepIndex] === undefined;
+                } else if (stepId === 'personalization') {
+                    const totalNotes = Object.values(journeyState.selectedNotes).reduce((acc, notes) => acc + notes.length, 0);
+                    nextDisabled = !journeyState.perfumeName.trim() || totalNotes === 0;
+                }
+                nextBtn.disabled = nextDisabled;
+
+                // Next Button Text
+                if (journeySteps[journeyState.currentStepIndex + 1] === 'results') {
+                    nextBtn.textContent = 'مشاهده تحلیل';
+                } else if (journeySteps[journeyState.currentStepIndex + 1] === 'personalization') {
+                    nextBtn.textContent = 'شخصی‌سازی رایحه';
+                } else if (journeySteps[journeyState.currentStepIndex + 1] === 'final_offer') {
+                    nextBtn.textContent = 'تایید و ادامه';
+                } else {
+                    nextBtn.textContent = 'بعدی';
+                }
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (nextBtn.disabled) return;
+                if (journeyState.currentStepIndex < journeySteps.length - 1) {
+                    journeyState.currentStepIndex++;
+                    renderJourneyStep();
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (journeyState.currentStepIndex > 0) {
+                    journeyState.currentStepIndex--;
+                    renderJourneyStep();
+                }
+            });
             
-            // Smooth scrolling for anchor links
+            // --- Smooth scrolling for anchor links ---
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
