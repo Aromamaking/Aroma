@@ -134,6 +134,7 @@
             <nav class="hidden md:flex space-x-8 space-x-reverse text-lg">
                 <a href="#philosophy" class="text-gray-300 hover:text-white transition">فلسفه ما</a>
                 <a href="#kits" class="text-gray-300 hover:text-white transition">کیت‌ها</a>
+                <a href="#ocr" class="text-gray-300 hover:text-white transition">کشف با دوربین</a>
                 <a href="#contact" class="text-gray-300 hover:text-white transition">تماس با ما</a>
             </nav>
             <button id="startJourneyBtnHeader" class="btn-primary font-bold py-2 px-6 rounded-lg text-lg">
@@ -216,6 +217,21 @@
         </div>
     </section>
 
+    <!-- OCR Section -->
+    <section id="ocr" class="py-20 bg-emerald-950">
+        <div class="container mx-auto px-6 text-center">
+            <i class="fa-solid fa-camera-retro text-yellow-400 text-5xl mb-4"></i>
+            <h3 class="text-3xl font-bold text-center mb-4 text-white">کشف با دوربین</h3>
+            <p class="text-lg text-gray-300 text-center mb-8 max-w-2xl mx-auto">
+                عطری را دیده‌اید و می‌خواهید بیشتر درباره آن بدانید؟ از آن عکس بگیرید تا هوش مصنوعی ما آن را برای شما تحلیل کند.
+            </p>
+            <button id="startOcrBtn" class="btn-primary font-bold py-3 px-8 rounded-lg text-xl">
+                شناسایی رایحه از روی تصویر
+            </button>
+            <input type="file" id="ocrFileInput" class="hidden" accept="image/*">
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer id="contact" class="bg-emerald-950 py-10 border-t border-emerald-900">
         <div class="container mx-auto px-6 text-center text-gray-300">
@@ -261,6 +277,20 @@
             </div>
         </div>
     </div>
+
+    <!-- OCR Result Modal -->
+    <div id="ocrResultModal" class="fixed inset-0 z-50 items-center justify-center modal-backdrop hidden">
+        <div id="ocrResultContainer" class="card rounded-2xl shadow-2xl w-11/12 md:w-2/3 lg:w-1/2 max-w-3xl max-h-[90vh] flex flex-col transform transition-all duration-300 scale-95 opacity-0">
+             <div class="p-4 border-b border-emerald-800 flex justify-between items-center">
+                <h3 class="text-2xl font-bold text-white">تحلیل هوش مصنوعی</h3>
+                <button id="closeOcrResultBtn" class="text-gray-300 hover:text-white text-3xl">&times;</button>
+            </div>
+            <div id="ocrResultContent" class="p-6 md:p-8 overflow-y-auto">
+                <!-- OCR results will be injected here -->
+            </div>
+        </div>
+    </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -778,4 +808,4 @@
     </script>
 
 </body>
-</html>
+</ht
