@@ -17,6 +17,9 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" xintegrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- html2pdf.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" xintegrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Custom Styles -->
     <style>
         body {
@@ -737,7 +740,7 @@
                 }
 
                 journeyContent.innerHTML = `
-                    <div class="certificate-new p-8 max-w-4xl mx-auto animate-fade-in text-white">
+                    <div id="certificateToPrint" class="certificate-new p-8 max-w-4xl mx-auto animate-fade-in text-white">
                         <div class="certificate-new-bg"></div>
                         <div class="certificate-border"></div>
                         <div class="relative z-10">
@@ -759,14 +762,13 @@
                                     <p class="font-cinzel text-sm">AROMA MASTER PERFUMER</p>
                                     <p class="text-xs text-gray-400">عطرساز ارشد آروما</p>
                                 </div>
-                                <div>
-                                    <p class="text-sm">${issueDate}</p>
-                                    <p class="text-xs text-gray-400">تاریخ صدور</p>
+                                <div class="text-center relative -bottom-16 -left-8">
+                                    <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/AromaC.png" alt="مهر اصالت" class="w-28 h-28 opacity-90">
+                                    <p class="text-sm text-yellow-400 -mt-16">${issueDate}</p>
                                 </div>
                             </div>
                             <div class="mt-6 text-center text-xs text-yellow-500 opacity-70 font-mono">${uniqueId}</div>
                         </div>
-                        <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/AromaC.png" alt="مهر اصالت" class="absolute bottom-4 left-4 w-28 h-28 opacity-90">
                     </div>
                 `;
             }
@@ -779,9 +781,28 @@
                 journeyTitle.textContent = stepId.startsWith('quiz') ? `تحلیل شخصیت (${journeyState.currentStepIndex + 1}/${totalQuizSteps})` : 'سفر بویایی شما';
                 
                 // Footer visibility
-                if (stepId === 'final_offer' || stepId === 'certificate') {
+                if (stepId === 'final_offer') {
                     journeyFooter.innerHTML = `<button id="finishJourneyBtn" class="btn-primary font-bold py-2 px-8 rounded-lg mx-auto">پایان و بستن</button>`;
                     document.getElementById('finishJourneyBtn').addEventListener('click', closeJourneyModal);
+                } else if (stepId === 'certificate') {
+                     journeyFooter.innerHTML = `
+                        <div class="mx-auto flex gap-4">
+                            <button id="downloadPdfBtn" class="bg-emerald-700 text-white font-bold py-2 px-8 rounded-lg hover:bg-emerald-600 transition">دانلود شناسنامه (PDF)</button>
+                            <button id="finishJourneyBtn" class="btn-primary font-bold py-2 px-8 rounded-lg">پایان و بستن</button>
+                        </div>
+                     `;
+                    document.getElementById('finishJourneyBtn').addEventListener('click', closeJourneyModal);
+                    document.getElementById('downloadPdfBtn').addEventListener('click', () => {
+                        const element = document.getElementById('certificateToPrint');
+                        const opt = {
+                          margin:       0.5,
+                          filename:     `شناسنامه-عطر-${journeyState.perfumeName}.pdf`,
+                          image:        { type: 'jpeg', quality: 0.98 },
+                          html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#064e3b' },
+                          jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+                        };
+                        html2pdf().set(opt).from(element).save();
+                    });
                 } else {
                     journeyFooter.innerHTML = `
                         <button id="prevBtn" class="bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-emerald-600 transition disabled:opacity-50 disabled:cursor-not-allowed">قبلی</button>
