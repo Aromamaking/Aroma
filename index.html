@@ -220,8 +220,22 @@
         </div>
     </section>
 
+    <!-- Kit Guide Section -->
+    <section id="kit-guide" class="py-20 bg-emerald-950">
+        <div class="container mx-auto px-6 text-center">
+             <i class="fa-solid fa-book-open text-yellow-400 text-5xl mb-4"></i>
+            <h3 class="text-3xl font-bold text-center mb-4 text-white">چگونه از کیت خود استفاده کنید؟</h3>
+            <p class="text-lg text-gray-300 text-center mb-8 max-w-2xl mx-auto">
+                کشف و خلق رایحه شخصی یک تجربه هنری است. راهنمای ما شما را در این سفر همراهی می‌کند.
+            </p>
+            <button id="openGuideBtn" class="btn-primary font-bold py-3 px-8 rounded-lg text-xl">
+                مشاهده راهنمای استفاده
+            </button>
+        </div>
+    </section>
+
     <!-- OCR Section -->
-    <section id="ocr" class="py-20 bg-emerald-950">
+    <section id="ocr" class="py-20">
         <div class="container mx-auto px-6 text-center">
             <i class="fa-solid fa-camera-retro text-yellow-400 text-5xl mb-4"></i>
             <h3 class="text-3xl font-bold text-center mb-4 text-white">کشف با دوربین</h3>
@@ -276,6 +290,65 @@
                 <button id="prevBtn" class="bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-emerald-600 transition disabled:opacity-50 disabled:cursor-not-allowed">قبلی</button>
                 <div id="stepIndicator" class="text-gray-400"></div>
                 <button id="nextBtn" class="btn-primary font-bold py-2 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">بعدی</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Guide Modal -->
+    <div id="guideModal" class="fixed inset-0 z-50 items-center justify-center modal-backdrop hidden">
+        <div id="guideContainer" class="card rounded-2xl shadow-2xl w-11/12 md:w-3/4 lg:w-2/3 max-w-4xl max-h-[90vh] flex flex-col transform transition-all duration-300 scale-95 opacity-0">
+            <div class="p-4 border-b border-emerald-800 flex justify-between items-center">
+                <h3 class="text-2xl font-bold text-white">راهنمای استفاده از کیت شخصی‌سازی رایحه</h3>
+                <button id="closeGuideBtn" class="text-gray-300 hover:text-white text-3xl">&times;</button>
+            </div>
+            <div class="p-6 md:p-8 overflow-y-auto text-right leading-relaxed">
+                <p class="mb-6">کیت شخصی‌سازی رایحه برای آن طراحی شده است که شما را وارد دنیای خلق عطر اختصاصی کند؛ جایی که هر رایحه می‌تواند بازتابی از شخصیت، خاطره یا سلیقه منحصربه‌فرد شما باشد. در ادامه با مراحل استفاده از این کیت آشنا خواهید شد:</p>
+                
+                <h4 class="text-xl font-bold text-yellow-400 mb-3">مرحله اول: کشف نُت‌ها</h4>
+                <p class="mb-4">در داخل کیت، چند ویال حاوی نُت‌های عطری قرار دارد که در سه دسته‌ی اصلی طبقه‌بندی شده‌اند:</p>
+                <ul class="list-disc list-inside mb-6 space-y-2 pr-4">
+                    <li><strong class="text-white">نُت‌های آغازین (Top Notes):</strong> رایحه‌هایی سبک و زودگذر مانند لیمو، ترنج یا اسطوخودوس</li>
+                    <li><strong class="text-white">نُت‌های میانی (Heart Notes):</strong> رایحه‌های اصلی مانند رز، چای یا هل</li>
+                    <li><strong class="text-white">نُت‌های پایه (Base Notes):</strong> رایحه‌های ماندگار مثل چرم، چوب صندل یا کهربا</li>
+                </ul>
+                <p class="mb-6">هر ویال دارای شماره یا برچسب اختصاصی است. برای تست هر نُت، مقدار کمی از آن را روی کاغذ تست (بلاتر) اسپری کرده، چند دقیقه صبر کرده و سپس آن را استشمام کنید.</p>
+
+                <h4 class="text-xl font-bold text-yellow-400 mb-3">مرحله دوم: انتخاب ترکیب شخصی</h4>
+                <p class="mb-4">اکنون زمان آن است که ترکیب مورد علاقه‌ی خود را انتخاب کنید. پیشنهاد می‌شود برای ساخت یک رایحه متعادل، از هر دسته نُت به‌صورت زیر انتخاب نمایید:</p>
+                 <ul class="list-disc list-inside mb-6 space-y-2 pr-4">
+                    <li>یک یا دو نُت آغازین</li>
+                    <li>یک یا دو نُت میانی</li>
+                    <li>یک نُت پایه</li>
+                </ul>
+                <p class="mb-6">با آزمون و تجربه می‌توانید ترکیبی را بیابید که بیشترین هماهنگی را با حس و حال شما دارد.</p>
+
+                <h4 class="text-xl font-bold text-yellow-400 mb-3">مرحله سوم: ترکیب نهایی</h4>
+                <p class="mb-4">در کیت، یک ویال خالی برای ترکیب نهایی در نظر گرفته شده است. ترکیب را با ترتیب زیر انجام دهید:</p>
+                 <ul class="list-disc list-inside mb-6 space-y-2 pr-4">
+                    <li>ابتدا نُت پایه را اضافه کنید (حدود ۳۰ درصد حجم ویال)</li>
+                    <li>سپس نُت‌های میانی را اضافه کنید (حدود ۴۰ درصد)</li>
+                    <li>در پایان، نُت‌های آغازین را اضافه نمایید (حدود ۳۰ درصد)</li>
+                </ul>
+                <p class="mb-6">در صورتی که کیت شامل اتانول مخصوص عطرسازی باشد، می‌توانید چند قطره از آن را برای افزایش پخش و ماندگاری اضافه نمایید.</p>
+
+                <h4 class="text-xl font-bold text-yellow-400 mb-3">مرحله چهارم: زمان استراحت رایحه</h4>
+                <p class="mb-6">برای تثبیت رایحه نهایی، ویال ترکیب‌شده را به‌مدت ۴۸ ساعت در محیطی خنک، خشک و تاریک نگهداری کنید. سپس آن را تست کرده و در صورت نیاز ترکیب را تنظیم نمایید.</p>
+
+                <h4 class="text-xl font-bold text-yellow-400 mb-3">مرحله پنجم: دریافت شناسنامه دیجیتال رایحه</h4>
+                <p class="mb-4">پس از نهایی‌شدن ترکیب:</p>
+                 <ul class="list-disc list-inside mb-6 space-y-2 pr-4">
+                    <li>به لینک اختصاصی درج‌شده روی کارت همراه کیت مراجعه نمایید</li>
+                    <li>نُت‌های انتخابی خود را ثبت کنید</li>
+                    <li>شناسنامه دیجیتال با نام و مشخصات شما صادر خواهد شد</li>
+                </ul>
+
+                <h4 class="text-xl font-bold text-yellow-400 mb-3">نکات ایمنی و تکمیلی</h4>
+                 <ul class="list-disc list-inside mb-6 space-y-2 pr-4">
+                    <li>این کیت برای استفاده شخصی طراحی شده است و محتویات آن نباید به‌طور مستقیم با پوست تماس داشته باشند</li>
+                    <li>دور از دسترس کودکان و در محیطی خشک و خنک نگهداری شود</li>
+                    <li>برای هر تست جدید از بلاتر جداگانه استفاده نمایید</li>
+                </ul>
+                 <p>برای تهیه کیت اختصاصی یا ثبت شناسنامه دیجیتال رایحه خود، به بخش «سفر بویایی من» در وب‌سایت مراجعه نمایید.</p>
             </div>
         </div>
     </div>
@@ -762,9 +835,9 @@
                                     <p class="font-cinzel text-sm">AROMA MASTER PERFUMER</p>
                                     <p class="text-xs text-gray-400">عطرساز ارشد آروما</p>
                                 </div>
-                                <div class="text-center relative -bottom-16 -left-8">
+                                <div class="text-center relative">
                                     <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/AromaC.png" alt="مهر اصالت" class="w-28 h-28 opacity-90">
-                                    <p class="text-sm text-yellow-400 -mt-16">${issueDate}</p>
+                                    <p class="text-sm text-yellow-400 absolute bottom-10 left-1/2 -translate-x-1/2 w-full">${issueDate}</p>
                                 </div>
                             </div>
                             <div class="mt-6 text-center text-xs text-yellow-500 opacity-70 font-mono">${uniqueId}</div>
