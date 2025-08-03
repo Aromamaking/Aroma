@@ -75,16 +75,6 @@
             opacity: 0.5;
             cursor: not-allowed;
         }
-        .validation-error {
-            box-shadow: 0 0 0 2px #ef4444; /* Red-500 */
-            animation: shake 0.5s;
-        }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-        /* New Certificate Styles */
         .certificate-new {
             background-color: #064e3b;
             position: relative;
@@ -110,6 +100,51 @@
             border: 2px solid #D4AF37;
             pointer-events: none;
         }
+        
+        /* Certificate Styles for PDF/Print */
+        #certificatePDF {
+            display: none; /* Hidden by default, only used for PDF generation */
+            width: 11in;
+            height: 8.5in;
+            padding: 0.5in;
+            background-color: white;
+            color: #1f2937;
+            font-family: 'Vazirmatn', sans-serif;
+            box-sizing: border-box;
+            position: relative;
+        }
+        #certificatePDF .pdf-border {
+            position: absolute;
+            top: 0.25in;
+            left: 0.25in;
+            right: 0.25in;
+            bottom: 0.25in;
+            border: 4px double #D4AF37;
+            content: '';
+        }
+        #certificatePDF .font-cinzel {
+             font-family: 'Cinzel', serif;
+        }
+        #certificatePDF h2 {
+            font-size: 3rem;
+            color: #D4AF37;
+            letter-spacing: 0.2em;
+        }
+        #certificatePDF h3 {
+            font-size: 2.5rem;
+            color: #1f2937;
+        }
+        #certificatePDF p {
+            font-size: 1.1rem;
+        }
+        #certificatePDF .brand-logo {
+            width: 100px;
+        }
+        #certificatePDF .qr-code {
+            width: 120px;
+            height: 120px;
+        }
+
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
@@ -137,6 +172,7 @@
             <nav class="hidden md:flex space-x-8 space-x-reverse text-lg">
                 <a href="#philosophy" class="text-gray-300 hover:text-white transition">فلسفه ما</a>
                 <a href="#kits" class="text-gray-300 hover:text-white transition">کیت‌ها</a>
+                <a href="#kit-guide" class="text-gray-300 hover:text-white transition">راهنمای کیت</a>
                 <a href="#ocr" class="text-gray-300 hover:text-white transition">کشف با دوربین</a>
                 <a href="#contact" class="text-gray-300 hover:text-white transition">تماس با ما</a>
             </nav>
@@ -184,35 +220,24 @@
         <div class="container mx-auto px-6">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">کیت‌های کشف بر اساس آرکتایپ</h3>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Kit 1: Ruler -->
+                <!-- Kit Cards -->
                 <div class="card rounded-xl overflow-hidden group flex flex-col items-center justify-start p-6 text-center h-full">
-                    <div class="mb-4 text-yellow-400 group-hover:scale-110 transition-transform duration-300" style="font-size: 4rem;">
-                        <i class="fa-solid fa-crown"></i>
-                    </div>
+                    <div class="mb-4 text-yellow-400 group-hover:scale-110 transition-transform duration-300" style="font-size: 4rem;"><i class="fa-solid fa-crown"></i></div>
                     <h4 class="text-2xl font-bold text-white mb-2">کیت حاکم</h4>
                     <p class="text-gray-300">رایحه‌های چوبی و چرمی برای شخصیتی قدرتمند و با اعتماد به نفس.</p>
                 </div>
-                <!-- Kit 2: Lover -->
                 <div class="card rounded-xl overflow-hidden group flex flex-col items-center justify-start p-6 text-center h-full">
-                    <div class="mb-4 text-yellow-400 group-hover:scale-110 transition-transform duration-300" style="font-size: 4rem;">
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
+                    <div class="mb-4 text-yellow-400 group-hover:scale-110 transition-transform duration-300" style="font-size: 4rem;"><i class="fa-solid fa-heart"></i></div>
                     <h4 class="text-2xl font-bold text-white mb-2">کیت عاشق</h4>
                     <p class="text-gray-300">عطرهای گلی و شیرین برای روحیه‌ای لطیف، صمیمی و سرشار از احساس.</p>
                 </div>
-                <!-- Kit 3: Explorer -->
                 <div class="card rounded-xl overflow-hidden group flex flex-col items-center justify-start p-6 text-center h-full">
-                    <div class="mb-4 text-yellow-400 group-hover:scale-110 transition-transform duration-300" style="font-size: 4rem;">
-                        <i class="fa-solid fa-compass"></i>
-                    </div>
+                    <div class="mb-4 text-yellow-400 group-hover:scale-110 transition-transform duration-300" style="font-size: 4rem;"><i class="fa-solid fa-compass"></i></div>
                     <h4 class="text-2xl font-bold text-white mb-2">کیت جستجوگر</h4>
                     <p class="text-gray-300">نت‌های مرکباتی و تازه برای شخصیتی پویا، نوآور و عاشق تجربه.</p>
                 </div>
-                <!-- Kit 4: Creator -->
                 <div class="card rounded-xl overflow-hidden group flex flex-col items-center justify-start p-6 text-center h-full">
-                    <div class="mb-4 text-yellow-400 group-hover:scale-110 transition-transform duration-300" style="font-size: 4rem;">
-                        <i class="fa-solid fa-pen-nib"></i>
-                    </div>
+                    <div class="mb-4 text-yellow-400 group-hover:scale-110 transition-transform duration-300" style="font-size: 4rem;"><i class="fa-solid fa-pen-nib"></i></div>
                     <h4 class="text-2xl font-bold text-white mb-2">کیت خالق</h4>
                     <p class="text-gray-300">رایحه‌های غیرمعمول و هنری برای روحیه‌ای ساختارشکن و منحصربه‌فرد.</p>
                 </div>
@@ -287,15 +312,13 @@
                 <!-- Journey steps will be injected here by JavaScript -->
             </div>
             <div id="journeyFooter" class="p-4 border-t border-emerald-800 flex justify-between items-center">
-                <button id="prevBtn" class="bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-emerald-600 transition disabled:opacity-50 disabled:cursor-not-allowed">قبلی</button>
-                <div id="stepIndicator" class="text-gray-400"></div>
-                <button id="nextBtn" class="btn-primary font-bold py-2 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">بعدی</button>
+                <!-- Footer buttons will be injected here -->
             </div>
         </div>
     </div>
     
     <!-- Guide Modal -->
-    <div id="guideModal" class="fixed inset-0 z-50 items-center justify-center modal-backdrop hidden">
+    <div id="guideModal" class="fixed inset-0 z-[60] items-center justify-center modal-backdrop hidden">
         <div id="guideContainer" class="card rounded-2xl shadow-2xl w-11/12 md:w-3/4 lg:w-2/3 max-w-4xl max-h-[90vh] flex flex-col transform transition-all duration-300 scale-95 opacity-0">
             <div class="p-4 border-b border-emerald-800 flex justify-between items-center">
                 <h3 class="text-2xl font-bold text-white">راهنمای استفاده از کیت شخصی‌سازی رایحه</h3>
@@ -335,20 +358,7 @@
                 <p class="mb-6">برای تثبیت رایحه نهایی، ویال ترکیب‌شده را به‌مدت ۴۸ ساعت در محیطی خنک، خشک و تاریک نگهداری کنید. سپس آن را تست کرده و در صورت نیاز ترکیب را تنظیم نمایید.</p>
 
                 <h4 class="text-xl font-bold text-yellow-400 mb-3">مرحله پنجم: دریافت شناسنامه دیجیتال رایحه</h4>
-                <p class="mb-4">پس از نهایی‌شدن ترکیب:</p>
-                 <ul class="list-disc list-inside mb-6 space-y-2 pr-4">
-                    <li>به لینک اختصاصی درج‌شده روی کارت همراه کیت مراجعه نمایید</li>
-                    <li>نُت‌های انتخابی خود را ثبت کنید</li>
-                    <li>شناسنامه دیجیتال با نام و مشخصات شما صادر خواهد شد</li>
-                </ul>
-
-                <h4 class="text-xl font-bold text-yellow-400 mb-3">نکات ایمنی و تکمیلی</h4>
-                 <ul class="list-disc list-inside mb-6 space-y-2 pr-4">
-                    <li>این کیت برای استفاده شخصی طراحی شده است و محتویات آن نباید به‌طور مستقیم با پوست تماس داشته باشند</li>
-                    <li>دور از دسترس کودکان و در محیطی خشک و خنک نگهداری شود</li>
-                    <li>برای هر تست جدید از بلاتر جداگانه استفاده نمایید</li>
-                </ul>
-                 <p>برای تهیه کیت اختصاصی یا ثبت شناسنامه دیجیتال رایحه خود، به بخش «سفر بویایی من» در وب‌سایت مراجعه نمایید.</p>
+                <p class="mb-4">پس از نهایی‌شدن ترکیب، به بخش «سفر بویایی من» در وب‌سایت مراجعه کرده، نُت‌های انتخابی خود را ثبت کنید تا شناسنامه دیجیتال با نام و مشخصات شما صادر شود.</p>
             </div>
         </div>
     </div>
@@ -360,14 +370,9 @@
                 <h3 class="text-2xl font-bold text-white">شناسایی با دوربین</h3>
                 <button id="closeCameraBtn" class="text-gray-300 hover:text-white text-3xl">&times;</button>
             </div>
-            <div class="p-6">
-                <video id="cameraFeed" class="w-full h-auto rounded-lg" autoplay playsinline></video>
-                <canvas id="photoCanvas" class="hidden"></canvas>
-            </div>
+            <div class="p-6"><video id="cameraFeed" class="w-full h-auto rounded-lg" autoplay playsinline></video><canvas id="photoCanvas" class="hidden"></canvas></div>
             <div class="p-4 border-t border-emerald-800 text-center">
-                <button id="captureBtn" class="btn-primary font-bold py-3 px-8 rounded-lg text-lg">
-                    <i class="fa-solid fa-camera mr-2"></i> عکس بگیر
-                </button>
+                <button id="captureBtn" class="btn-primary font-bold py-3 px-8 rounded-lg text-lg"><i class="fa-solid fa-camera mr-2"></i> عکس بگیر</button>
             </div>
         </div>
     </div>
@@ -379,10 +384,13 @@
                 <h3 class="text-2xl font-bold text-white">تحلیل هوش مصنوعی</h3>
                 <button id="closeOcrResultBtn" class="text-gray-300 hover:text-white text-3xl">&times;</button>
             </div>
-            <div id="ocrResultContent" class="p-6 md:p-8 overflow-y-auto">
-                <!-- OCR results will be injected here -->
-            </div>
+            <div id="ocrResultContent" class="p-6 md:p-8 overflow-y-auto"></div>
         </div>
+    </div>
+    
+    <!-- NEW: Hidden container for PDF generation -->
+    <div id="certificatePDF" class="font-vazir">
+        <!-- This will be populated by JavaScript before PDF generation -->
     </div>
 
 
@@ -394,15 +402,13 @@
             const journeyTitle = document.getElementById('journeyTitle');
             const journeyContent = document.getElementById('journeyContent');
             const journeyFooter = document.getElementById('journeyFooter');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const stepIndicator = document.getElementById('stepIndicator');
             const guideModal = document.getElementById('guideModal');
             const guideContainer = document.getElementById('guideContainer');
 
             // --- Journey State ---
             let journeyState = {};
 
+            // --- Data Definitions (RESTORED FROM ORIGINAL) ---
             const journeySteps = [
                 'quiz_1', 'quiz_2', 'quiz_3', 'quiz_4', 'quiz_5', 'quiz_6',
                 'results', 
@@ -495,95 +501,64 @@
                     title: "حاکم",
                     explanation: "شما شخصیتی قدرتمند، منظم و با اعتماد به نفس هستید که به کیفیت، کنترل و ساختارهای پایدار اهمیت می‌دهید.",
                     fragranceLink: "این پروفایل جذب رایحه‌هایی می‌شود که حس قدرت و وقار را منتقل می‌کنند: نت‌های سنگین، چوبی، چرمی و ادویه‌ای.",
-                    recommendedNotes: { top: ['زعفران'], middle: ['جیر', 'روایح دودی'], base: ['چوب سدر', 'چرم'] },
-                    scentProfile: 'چوبی، قدرتمند، باوقار',
-                    season: 'پاییز و زمستان',
-                    occasion: 'جلسات رسمی، رویدادهای شبانه',
-                    story: 'قدرت در سکوت، شکوه در اصالت.'
+                    recommendedNotes: { top: ['زعفران'], middle: ['جیر', 'روایح دودی'], base: ['چوب سدر', 'چرم'] }
                 },
                 creator: {
                     title: "خالق",
                     explanation: "شما روحیه‌ای نوآور، مستقل و دارای اصالت دارید و از ساختن چیزهای جدید و بیان خود به شیوه‌ای منحصربه‌فرد لذت می‌برید.",
                     fragranceLink: "این پروفایل جذب رایحه‌های ساختارشکن و غیرمنتظره می‌شود: نت‌های سبز، معدنی، و ترکیبات غیرمعمول.",
-                    recommendedNotes: { top: ['گریپ فروت', 'فلفل صورتی'], middle: ['زنبق', 'شمعدانی'], base: ['خس خس (وتیور)', 'پچولی (نعناع هندی)'] },
-                    scentProfile: 'هنری، سبز، غیرمنتظره',
-                    season: 'بهار و پاییز',
-                    occasion: 'رویدادهای هنری، محیط کار خلاق',
-                    story: 'شکستن مرزها، خلق یک امضای جدید.'
+                    recommendedNotes: { top: ['گریپ فروت', 'فلفل صورتی'], middle: ['زنبق', 'شمعدانی'], base: ['خس خس (وتیور)', 'پچولی (نعناع هندی)'] }
                 },
                 lover: {
                     title: "عاشق",
                     explanation: "شما شخصیتی احساسی، خونگرم و اجتماعی دارید و برای زیبایی، هماهنگی و ارتباطات عمیق ارزش قائل هستید.",
                     fragranceLink: "این پروفایل جذب رایحه‌هایی می‌شود که حس صمیمیت و جذابیت را القا می‌کنند: نت‌های گلی، شیرین، میوه‌ای و شرقی.",
-                    recommendedNotes: { top: ['ترنج'], middle: ['رز', 'یاس', 'بهار نارنج'], base: ['وانیل', 'مشک'] },
-                    scentProfile: 'گرم، شیرین، اغواگر',
-                    season: 'تمام فصول',
-                    occasion: 'ملاقات‌های عاشقانه، دورهمی‌های صمیمی',
-                    story: 'روایتگر شور و صمیمیت.'
+                    recommendedNotes: { top: ['ترنج'], middle: ['رز', 'یاس', 'بهار نارنج'], base: ['وانیل', 'مشک'] }
                 },
                 explorer: {
                     title: "جستجوگر",
                     explanation: "شما شخصیتی ماجراجو، مستقل و پرانرژی دارید و از تجربه کردن، یادگیری و شکستن مرزها لذت می‌برید.",
                     fragranceLink: "این پروفایل جذب رایحه‌هایی می‌شود که حس طراوت و آزادی را منتقل می‌کنند: نت‌های مرکباتی، آروماتیک و دریایی.",
-                    recommendedNotes: { top: ['لیموترش', 'آب دریا'], middle: ['اسطوخودوس', 'چای'], base: ['خزه بلوط', 'کهربا'] },
-                    scentProfile: 'تازه، پرانرژی، آزاد',
-                    season: 'بهار و تابستان',
-                    occasion: 'فعالیت‌های روزانه، سفر و ماجراجویی',
-                    story: 'دعوت به کشف ناشناخته‌ها.'
+                    recommendedNotes: { top: ['لیموترش', 'آب دریا'], middle: ['اسطوخودوس', 'چای'], base: ['خزه بلوط', 'کهربا'] }
                 }
             };
             
+            // --- Modal Handling ---
+            function openModal(modal, container) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => container.classList.remove('scale-95', 'opacity-0'), 10);
+            }
+            function closeModal(modal, container) {
+                container.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 300);
+            }
+
+            // --- Journey Logic ---
             function resetJourney() {
-                journeyState = {
-                    currentStepIndex: 0,
-                    answers: {},
-                    archetype: { primary: null, secondary: null },
-                    selectedNotes: { top: [], middle: [], base: [] },
-                    perfumeName: '',
-                    customerName: ''
-                };
+                journeyState = { currentStepIndex: 0, answers: {}, archetype: { primary: null, secondary: null }, selectedNotes: { top: [], middle: [], base: [] }, perfumeName: '', customerName: '', uniqueId: '' };
             }
 
             function openJourneyModal() {
                 resetJourney();
-                journeyModal.classList.remove('hidden');
-                journeyModal.classList.add('flex');
-                setTimeout(() => {
-                    journeyContainer.classList.remove('scale-95', 'opacity-0');
-                }, 10);
+                openModal(journeyModal, journeyContainer);
                 renderJourneyStep();
             }
 
-            function closeJourneyModal() {
-                journeyContainer.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => {
-                    journeyModal.classList.add('hidden');
-                    journeyModal.classList.remove('flex');
-                }, 300);
-            }
-
-            document.getElementById('startJourneyBtnHeader').addEventListener('click', openJourneyModal);
-            document.getElementById('startJourneyBtnHero').addEventListener('click', openJourneyModal);
-            document.getElementById('closeJourneyBtn').addEventListener('click', closeJourneyModal);
-
             function renderJourneyStep() {
                 const stepId = journeySteps[journeyState.currentStepIndex];
-                journeyContent.innerHTML = ''; // Clear previous content
-                
-                // Scroll to top of content area on step change
+                journeyContent.innerHTML = ''; 
                 journeyContent.scrollTop = 0;
 
-                if (stepId.startsWith('quiz')) {
-                    renderQuizStep();
-                } else if (stepId === 'results') {
-                    renderResultsStep();
-                } else if (stepId === 'personalization') {
-                    renderPersonalizationStep();
-                } else if (stepId === 'final_offer') {
-                    renderFinalOfferStep();
-                } else if (stepId === 'certificate') {
-                    renderCertificateStep();
-                }
+                if (stepId.startsWith('quiz')) renderQuizStep();
+                else if (stepId === 'results') renderResultsStep();
+                else if (stepId === 'personalization') renderPersonalizationStep();
+                else if (stepId === 'final_offer') renderFinalOfferStep();
+                else if (stepId === 'certificate') renderCertificateStep();
+                
                 updateJourneyUI();
             }
             
@@ -596,51 +571,40 @@
                     const optionsHtml = stepData.options.map((opt, index) => `
                         <div class="cursor-pointer visual-option rounded-lg overflow-hidden ${journeyState.answers[questionIndex] === index ? 'selected' : ''}" data-index="${index}">
                             <img src="${opt.image}" alt="${opt.alt}" class="w-full h-40 md:h-48 object-cover">
-                        </div>
-                    `).join('');
+                        </div>`).join('');
                     contentHtml = `<div class="grid grid-cols-2 md:grid-cols-4 gap-4">${optionsHtml}</div>`;
                 } else {
                     const optionsHtml = stepData.options.map((opt, index) => `
                         <label class="block card p-4 rounded-lg cursor-pointer hover:bg-emerald-800 transition border-2 ${journeyState.answers[questionIndex] === index ? 'border-yellow-400' : 'border-transparent'}">
                             <input type="radio" name="q${questionIndex}" value="${index}" class="hidden" ${journeyState.answers[questionIndex] === index ? 'checked' : ''}>
                             <span class="text-lg">${opt.text}</span>
-                        </label>
-                    `).join('');
+                        </label>`).join('');
                     contentHtml = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">${optionsHtml}</div>`;
                 }
                 
-                journeyContent.innerHTML = `
-                    <h4 class="text-2xl font-bold mb-6 text-center text-white">${stepData.question}</h4>
-                    ${contentHtml}
-                `;
+                journeyContent.innerHTML = `<h4 class="text-2xl font-bold mb-6 text-center text-white">${stepData.question}</h4>${contentHtml}`;
                 
-                // Add event listeners
                 if (stepData.type === 'visual') {
-                    journeyContent.querySelectorAll('.visual-option').forEach(el => {
-                        el.addEventListener('click', (e) => {
-                            journeyState.answers[questionIndex] = parseInt(e.currentTarget.dataset.index);
-                            renderJourneyStep();
-                        });
-                    });
+                    journeyContent.querySelectorAll('.visual-option').forEach(el => el.addEventListener('click', (e) => {
+                        journeyState.answers[questionIndex] = parseInt(e.currentTarget.dataset.index);
+                        renderJourneyStep();
+                    }));
                 } else {
-                    journeyContent.querySelectorAll(`input[name="q${questionIndex}"]`).forEach(radio => {
-                        radio.addEventListener('change', (e) => {
-                            journeyState.answers[questionIndex] = parseInt(e.target.value);
-                            renderJourneyStep();
-                        });
-                    });
+                    journeyContent.querySelectorAll(`input[name="q${questionIndex}"]`).forEach(radio => radio.addEventListener('change', (e) => {
+                        journeyState.answers[questionIndex] = parseInt(e.target.value);
+                        renderJourneyStep();
+                    }));
                 }
             }
 
             function renderResultsStep() {
                 const scores = { ruler: 0, creator: 0, lover: 0, explorer: 0 };
-                for(const qIndex in journeyState.answers) {
-                    const answerIndex = journeyState.answers[qIndex];
+                Object.values(journeyState.answers).forEach((answerIndex, qIndex) => {
                     const answerScores = questions[qIndex].options[answerIndex].scores;
                     for (const archetype in answerScores) {
                         scores[archetype] += answerScores[archetype];
                     }
-                }
+                });
                 
                 const sortedArchetypes = Object.entries(scores).sort((a, b) => b[1] - a[1]);
                 journeyState.archetype.primary = sortedArchetypes[0][0];
@@ -648,10 +612,8 @@
 
                 const primary = archetypeData[journeyState.archetype.primary];
                 const secondary = archetypeData[journeyState.archetype.secondary];
-                
                 const hybridTitle = `«${primary.title} با رگه‌هایی از ${secondary.title}»`;
 
-                // Pre-populate selected notes
                 const recommended = {
                     top: [...new Set([...primary.recommendedNotes.top, ...secondary.recommendedNotes.top])].slice(0, 2),
                     middle: [...new Set([...primary.recommendedNotes.middle, ...secondary.recommendedNotes.middle])].slice(0, 3),
@@ -663,267 +625,280 @@
                     <div class="animate-fade-in text-right">
                         <p class="text-xl text-yellow-400 mb-2">مرحله ۱: تحلیل شخصیت شما</p>
                         <h4 class="text-4xl font-bold text-white mb-4">${hybridTitle}</h4>
-                        
                         <div class="border-t border-b border-emerald-800 py-4 my-4">
                             <h5 class="text-xl font-bold text-white mb-2">تحلیل شخصیت:</h5>
                             <p class="text-lg text-gray-300">${primary.explanation} این ویژگی‌ها با استقلال‌طلبی و خلاقیت آرکتایپ ${secondary.title} ترکیب شده و شخصیتی چندبعدی و منحصربه‌فرد را شکل می‌دهد.</p>
                         </div>
-
                         <div class="border-b border-emerald-800 py-4 my-4">
                             <h5 class="text-xl font-bold text-white mb-2">نت‌های پیشنهادی برای شما:</h5>
                             <p class="text-lg text-gray-300">ترکیبی هوشمند از رایحه‌های مرتبط با هر دو آرکتایپ شما، یک پروفایل بویایی پیچیده و خاص ایجاد می‌کند.</p>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }
 
             function renderPersonalizationStep() {
                 const limits = { top: 2, middle: 3, base: 2 };
 
-                const generateNotesHTML = (category) => {
-                    return notesData[category].map(note => {
-                        const isChecked = journeyState.selectedNotes[category].includes(note.name);
-                        const isDisabled = !isChecked && journeyState.selectedNotes[category].length >= limits[category];
-                        return `
-                            <div>
-                                <input type="checkbox" id="${note.id}" name="${category}" value="${note.name}" class="hidden note-checkbox" ${isChecked ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}>
-                                <label for="${note.id}" class="block text-center cursor-pointer p-3 rounded-lg border-2 border-emerald-700 hover:border-yellow-400 transition-colors duration-200">
-                                    ${note.name}
-                                </label>
-                            </div>
-                        `;
-                    }).join('');
-                };
+                const generateNotesHTML = (category) => notesData[category].map(note => {
+                    const isChecked = journeyState.selectedNotes[category].includes(note.name);
+                    const isDisabled = !isChecked && journeyState.selectedNotes[category].length >= limits[category];
+                    return `<div><input type="checkbox" id="${note.id}" name="${category}" value="${note.name}" class="hidden note-checkbox" ${isChecked ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}><label for="${note.id}" class="block text-center cursor-pointer p-3 rounded-lg border-2 border-emerald-700 hover:border-yellow-400 transition-colors duration-200">${note.name}</label></div>`;
+                }).join('');
 
-                const updateSummaryHTML = () => {
-                    let summaryHtml = '';
-                    for (const category in journeyState.selectedNotes) {
-                        const notes = journeyState.selectedNotes[category];
-                        summaryHtml += `
-                            <div>
-                                <h5 class="font-bold text-yellow-400 mb-2 capitalize">${category === 'top' ? 'آغازی' : (category === 'middle' ? 'میانی' : 'پایانی')}:</h5>
-                                <div id="summary-${category}" class="text-gray-300 min-h-[50px]">
-                                    ${notes.length > 0 ? notes.map(note => `<span class="inline-block bg-emerald-800 rounded-full px-3 py-1 text-sm font-semibold text-gray-200 mr-2 mb-2">${note}</span>`).join('') : '<span class="text-gray-500">...</span>'}
-                                </div>
-                            </div>
-                        `;
-                    }
-                    return summaryHtml;
-                };
+                const updateSummaryHTML = () => Object.keys(journeyState.selectedNotes).map(category => {
+                    const notes = journeyState.selectedNotes[category];
+                    const categoryTitle = category === 'top' ? 'آغازی' : (category === 'middle' ? 'میانی' : 'پایانی');
+                    const notesHtml = notes.length > 0 ? notes.map(note => `<span class="inline-block bg-emerald-800 rounded-full px-3 py-1 text-sm font-semibold text-gray-200 mr-2 mb-2">${note}</span>`).join('') : '<span class="text-gray-500">...</span>';
+                    return `<div><h5 class="font-bold text-yellow-400 mb-2 capitalize">${categoryTitle}:</h5><div class="text-gray-300 min-h-[50px]">${notesHtml}</div></div>`;
+                }).join('');
 
                 journeyContent.innerHTML = `
                     <h3 class="text-2xl font-bold text-center mb-4 text-white">مرحله ۲: شخصی‌سازی رایحه</h3>
-                    <p class="text-md text-gray-300 text-center mb-8 max-w-2xl mx-auto">
-                        نت‌های پیشنهادی ما برای شما انتخاب شده‌اند. می‌توانید آن‌ها را ویرایش کرده یا ترکیب کاملاً جدیدی خلق کنید.
-                    </p>
+                    <p class="text-md text-gray-300 text-center mb-8">نت‌های پیشنهادی ما برای شما انتخاب شده‌اند. می‌توانید آن‌ها را ویرایش کرده یا ترکیب جدیدی خلق کنید.</p>
                     <div class="grid lg:grid-cols-3 gap-8">
-                        <div class="card p-6 rounded-xl">
-                            <h4 class="text-xl font-bold text-yellow-400 border-b-2 border-yellow-400 pb-2 mb-4">نت‌های آغازی (حداکثر ${limits.top})</h4>
-                            <div class="space-y-3">${generateNotesHTML('top')}</div>
-                        </div>
-                        <div class="card p-6 rounded-xl">
-                            <h4 class="text-xl font-bold text-yellow-400 border-b-2 border-yellow-400 pb-2 mb-4">نت‌های میانی (حداکثر ${limits.middle})</h4>
-                            <div class="space-y-3">${generateNotesHTML('middle')}</div>
-                        </div>
-                        <div class="card p-6 rounded-xl">
-                            <h4 class="text-xl font-bold text-yellow-400 border-b-2 border-yellow-400 pb-2 mb-4">نت‌های پایانی (حداکثر ${limits.base})</h4>
-                            <div class="space-y-3">${generateNotesHTML('base')}</div>
-                        </div>
+                        ${Object.keys(limits).map(cat => `<div class="card p-6 rounded-xl"><h4 class="text-xl font-bold text-yellow-400 border-b-2 border-yellow-400 pb-2 mb-4">نت‌های ${cat === 'top' ? 'آغازی' : (cat === 'middle' ? 'میانی' : 'پایانی')} (حداکثر ${limits[cat]})</h4><div class="space-y-3">${generateNotesHTML(cat)}</div></div>`).join('')}
                     </div>
-                     <div class="card mt-12 p-8 rounded-xl max-w-4xl mx-auto">
+                    <div class="card mt-12 p-8 rounded-xl max-w-4xl mx-auto">
                         <h4 class="text-2xl font-bold text-white mb-6 text-center">ترکیب نهایی شما</h4>
                         <div class="grid md:grid-cols-3 gap-6 text-center mb-6">${updateSummaryHTML()}</div>
                         <div class="mt-6 grid md:grid-cols-2 gap-4">
-                            <input type="text" id="customerNameInput" placeholder="نام شما (اختیاری)" value="${journeyState.customerName}" class="w-full bg-emerald-800 border border-emerald-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-shadow">
-                            <input type="text" id="perfumeNameInput" placeholder="نام عطر خود را وارد کنید..." value="${journeyState.perfumeName}" class="w-full bg-emerald-800 border border-emerald-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-shadow">
+                            <input type="text" id="customerNameInput" placeholder="نام شما (برای شناسنامه)" value="${journeyState.customerName}" class="w-full bg-emerald-800 border border-emerald-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                            <input type="text" id="perfumeNameInput" placeholder="نام عطر خود را وارد کنید..." value="${journeyState.perfumeName}" class="w-full bg-emerald-800 border border-emerald-700 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400">
                         </div>
-                    </div>
-                `;
+                        <div id="apiMessage" class="text-center mt-4 text-yellow-400 h-6"></div>
+                    </div>`;
 
-                journeyContent.querySelectorAll('.note-checkbox').forEach(checkbox => {
-                    checkbox.addEventListener('change', (e) => {
-                        const category = e.target.name;
-                        const value = e.target.value;
-                        if (e.target.checked) {
-                            if (journeyState.selectedNotes[category].length < limits[category]) {
-                                journeyState.selectedNotes[category].push(value);
-                            }
-                        } else {
-                            journeyState.selectedNotes[category] = journeyState.selectedNotes[category].filter(note => note !== value);
-                        }
-                        renderPersonalizationStep(); // Re-render to update disabled states and summary
-                    });
-                });
+                journeyContent.querySelectorAll('.note-checkbox').forEach(checkbox => checkbox.addEventListener('change', (e) => {
+                    const { name: category, value, checked } = e.target;
+                    if (checked) {
+                        if (journeyState.selectedNotes[category].length < limits[category]) journeyState.selectedNotes[category].push(value);
+                    } else {
+                        journeyState.selectedNotes[category] = journeyState.selectedNotes[category].filter(note => note !== value);
+                    }
+                    renderPersonalizationStep();
+                }));
                 
-                journeyContent.getElementById('perfumeNameInput').addEventListener('input', (e) => {
-                    journeyState.perfumeName = e.target.value;
-                    updateJourneyUI();
-                });
-                 journeyContent.getElementById('customerNameInput').addEventListener('input', (e) => {
-                    journeyState.customerName = e.target.value;
-                });
+                journeyContent.getElementById('perfumeNameInput').addEventListener('input', (e) => { journeyState.perfumeName = e.target.value; updateJourneyUI(); });
+                journeyContent.getElementById('customerNameInput').addEventListener('input', (e) => { journeyState.customerName = e.target.value; updateJourneyUI(); });
             }
 
             function renderFinalOfferStep() {
                 journeyContent.innerHTML = `
                     <h3 class="text-2xl font-bold text-center mb-4 text-white">مرحله نهایی: عطر شما آماده است!</h3>
-                    <p class="text-md text-gray-300 text-center mb-8 max-w-2xl mx-auto">
-                        رایحه <strong class="text-yellow-400">"${journeyState.perfumeName}"</strong> بر اساس انتخاب شما طراحی شده است. حالا می‌توانید آن را تجربه کنید.
-                    </p>
+                    <p class="text-md text-gray-300 text-center mb-8">رایحه <strong class="text-yellow-400">"${journeyState.perfumeName}"</strong> بر اساس انتخاب شما طراحی شده است.</p>
                     <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                         <div id="orderKitBtn" class="card p-8 rounded-xl flex flex-col items-center text-center border-2 border-transparent hover:border-yellow-400 transition cursor-pointer">
                             <h4 class="text-2xl font-bold text-white mb-4">گزینه ۱: کیت کشف</h4>
-                            <p class="text-gray-300 mb-6 flex-grow">یک کیت نمونه حاوی عطر شخصی‌سازی شده خودتان را دریافت کنید تا آن را روی پوست خود امتحان کرده و از انتخاب نهایی مطمئن شوید.</p>
+                            <p class="text-gray-300 mb-6 flex-grow">یک کیت نمونه حاوی عطر شخصی‌سازی شده خودتان را دریافت کنید تا آن را روی پوست خود امتحان کنید.</p>
                             <span class="btn-primary font-bold py-3 px-8 rounded-lg text-lg w-full mt-4">سفارش کیت کشف</span>
                         </div>
                         <div id="orderBottleBtn" class="card p-8 rounded-xl flex flex-col items-center text-center border-2 border-transparent hover:border-yellow-400 transition cursor-pointer">
                             <h4 class="text-2xl font-bold text-white mb-4">گزینه ۲: بطری کامل</h4>
-                            <p class="text-gray-300 mb-6 flex-grow">اگر از ترکیب خود مطمئن هستید، بطری کامل عطر منحصربه‌فرد خود را سفارش دهید و از خلق اثر هنری خود لذت ببرید.</p>
+                            <p class="text-gray-300 mb-6 flex-grow">اگر از ترکیب خود مطمئن هستید، بطری کامل عطر منحصربه‌فرد خود را سفارش دهید.</p>
                             <span class="bg-emerald-700 text-white font-bold py-3 px-8 rounded-lg text-lg w-full mt-4 hover:bg-emerald-600">سفارش بطری کامل</span>
                         </div>
-                    </div>
-                `;
+                    </div>`;
 
-                journeyContent.getElementById('orderKitBtn').addEventListener('click', () => {
-                    journeyState.currentStepIndex++;
-                    renderJourneyStep();
-                });
-                journeyContent.getElementById('orderBottleBtn').addEventListener('click', () => {
-                    journeyState.currentStepIndex++;
-                    renderJourneyStep();
-                });
+                const nextStepAction = () => { journeyState.currentStepIndex++; renderJourneyStep(); };
+                journeyContent.getElementById('orderKitBtn').addEventListener('click', nextStepAction);
+                journeyContent.getElementById('orderBottleBtn').addEventListener('click', nextStepAction);
             }
 
             function renderCertificateStep() {
                 const primary = archetypeData[journeyState.archetype.primary];
                 const secondary = archetypeData[journeyState.archetype.secondary];
                 const hybridTitle = `«${primary.title} با رگه‌هایی از ${secondary.title}»`;
-                const allNotes = [
-                    ...journeyState.selectedNotes.top,
-                    ...journeyState.selectedNotes.middle,
-                    ...journeyState.selectedNotes.base
-                ];
+                const allNotes = [...journeyState.selectedNotes.top, ...journeyState.selectedNotes.middle, ...journeyState.selectedNotes.base];
                 const today = new Date();
                 const issueDate = new Intl.DateTimeFormat('fa-IR', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(today);
-                const uniqueId = `AROMA-${today.getFullYear().toString().slice(-2)}${(today.getMonth()+1).toString().padStart(2, '0')}${today.getDate().toString().padStart(2, '0')}-${Math.random().toString(36).substr(2, 4).toUpperCase()}`;
+                journeyState.uniqueId = `AROMA-${today.getFullYear().toString().slice(-2)}${(today.getMonth()+1).toString().padStart(2, '0')}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
 
-                let presentedToLine = '';
-                if (journeyState.customerName) {
-                    presentedToLine = `<p class="text-lg text-right">این شناسنامه برای رایحه‌ای که به نام <strong class="text-yellow-300">${journeyState.customerName}</strong> خلق شده، صادر گردیده است.</p>`;
-                } else {
-                    presentedToLine = `<p class="text-lg text-right">این شناسنامه برای رایحه خلق شده شما صادر گردیده است.</p>`;
-                }
+                const presentedToLine = journeyState.customerName ? `<p class="text-lg text-right">این شناسنامه برای رایحه‌ای که به نام <strong class="text-yellow-300">${journeyState.customerName}</strong> خلق شده، صادر گردیده است.</p>` : `<p class="text-lg text-right">این شناسنامه برای رایحه خلق شده شما صادر گردیده است.</p>`;
 
                 journeyContent.innerHTML = `
-                    <div id="certificateToPrint" class="certificate-new p-8 max-w-4xl mx-auto animate-fade-in text-white">
+                    <div class="certificate-new p-8 max-w-4xl mx-auto animate-fade-in text-white">
                         <div class="certificate-new-bg"></div>
                         <div class="certificate-border"></div>
                         <div class="relative z-10">
-                            <div class="text-center">
-                                <h2 class="font-cinzel text-3xl text-yellow-400 tracking-widest">CERTIFICATE</h2>
-                                <p class="font-cinzel text-lg text-gray-200">OF SCENT AUTHENTICITY</p>
-                            </div>
+                            <div class="text-center"><h2 class="font-cinzel text-3xl text-yellow-400 tracking-widest">CERTIFICATE</h2><p class="font-cinzel text-lg text-gray-200">OF SCENT AUTHENTICITY</p></div>
                             <div class="border-t border-yellow-400 opacity-50 my-6"></div>
-                            <div class="text-right space-y-4">
-                                ${presentedToLine}
-                                <p class="text-center text-4xl font-bold text-yellow-300 py-2">${journeyState.perfumeName}</p>
-                            </div>
+                            <div class="text-right space-y-4">${presentedToLine}<p class="text-center text-4xl font-bold text-yellow-300 py-2">${journeyState.perfumeName}</p></div>
                             <div class="text-right space-y-3 pt-6 mt-6 border-t border-emerald-700">
                                 <p><strong class="font-bold text-yellow-400">آرکتایپ رایحه:</strong> ${hybridTitle}</p>
                                 <p><strong class="font-bold text-yellow-400">نت‌های اصلی:</strong> ${allNotes.join('، ')}</p>
                             </div>
                             <div class="pt-8 mt-8 flex justify-between items-end border-t border-emerald-700">
-                                <div>
-                                    <p class="font-cinzel text-sm">AROMA MASTER PERFUMER</p>
-                                    <p class="text-xs text-gray-400">عطرساز ارشد آروما</p>
-                                </div>
+                                <div><p class="font-cinzel text-sm">AROMA MASTER PERFUMER</p><p class="text-xs text-gray-400">عطرساز ارشد آروما</p></div>
                                 <div class="text-center relative">
                                     <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/AromaC.png" alt="مهر اصالت" class="w-28 h-28 opacity-90">
                                     <p class="text-sm text-yellow-400 absolute bottom-10 left-1/2 -translate-x-1/2 w-full">${issueDate}</p>
                                 </div>
                             </div>
-                            <div class="mt-6 text-center text-xs text-yellow-500 opacity-70 font-mono">${uniqueId}</div>
+                            <div class="mt-6 text-center text-xs text-yellow-500 opacity-70 font-mono">${journeyState.uniqueId}</div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
+            }
+
+            async function submitScentData() {
+                const apiMessage = document.getElementById('apiMessage');
+                if (!apiMessage) return false;
+
+                apiMessage.textContent = 'در حال ثبت اطلاعات...';
+                const data = {
+                    customerName: journeyState.customerName,
+                    perfumeName: journeyState.perfumeName,
+                    archetype: journeyState.archetype,
+                    notes: journeyState.selectedNotes,
+                    uniqueId: journeyState.uniqueId
+                };
+
+                try {
+                    // ** API SUBMISSION SIMULATION **
+                    // Replace 'https://api.example.com/submit_scent' with your actual API endpoint.
+                    const response = await fetch('https://jsonplaceholder.typicode.com/posts', { // Using a public test API
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                         apiMessage.textContent = 'اطلاعات با موفقیت ثبت شد!';
+                         console.log('Submission successful (simulated)', data);
+                         return true;
+                    } else {
+                        throw new Error('Simulated API Error');
+                    }
+
+                } catch (error) {
+                    apiMessage.textContent = 'خطا در ثبت اطلاعات. لطفا دوباره تلاش کنید.';
+                    console.error('Submission failed (simulated)', error);
+                    return false;
+                }
             }
 
             function updateJourneyUI() {
                 const stepId = journeySteps[journeyState.currentStepIndex];
-                const totalQuizSteps = 6;
-                
-                // Title
+                const totalQuizSteps = questions.length;
                 journeyTitle.textContent = stepId.startsWith('quiz') ? `تحلیل شخصیت (${journeyState.currentStepIndex + 1}/${totalQuizSteps})` : 'سفر بویایی شما';
                 
-                // Footer visibility
-                if (stepId === 'final_offer') {
-                    journeyFooter.innerHTML = `<button id="finishJourneyBtn" class="btn-primary font-bold py-2 px-8 rounded-lg mx-auto">پایان و بستن</button>`;
-                    document.getElementById('finishJourneyBtn').addEventListener('click', closeJourneyModal);
-                } else if (stepId === 'certificate') {
-                     journeyFooter.innerHTML = `
-                        <div class="mx-auto flex gap-4">
+                let footerHtml = '';
+                if (stepId === 'certificate') {
+                    footerHtml = `
+                        <div class="mx-auto flex flex-col sm:flex-row gap-4">
                             <button id="downloadPdfBtn" class="bg-emerald-700 text-white font-bold py-2 px-8 rounded-lg hover:bg-emerald-600 transition">دانلود شناسنامه (PDF)</button>
                             <button id="finishJourneyBtn" class="btn-primary font-bold py-2 px-8 rounded-lg">پایان و بستن</button>
-                        </div>
-                     `;
-                    document.getElementById('finishJourneyBtn').addEventListener('click', closeJourneyModal);
-                    document.getElementById('downloadPdfBtn').addEventListener('click', () => {
-                        const element = document.getElementById('certificateToPrint');
-                        const opt = {
-                          margin:       0.5,
-                          filename:     `شناسنامه-عطر-${journeyState.perfumeName}.pdf`,
-                          image:        { type: 'jpeg', quality: 0.98 },
-                          html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#064e3b' },
-                          jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
-                        };
-                        html2pdf().set(opt).from(element).save();
-                    });
-                } else {
-                    journeyFooter.innerHTML = `
-                        <button id="prevBtn" class="bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-emerald-600 transition disabled:opacity-50 disabled:cursor-not-allowed">قبلی</button>
-                        <div id="stepIndicator" class="text-gray-400"></div>
-                        <button id="nextBtn" class="btn-primary font-bold py-2 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">بعدی</button>
-                    `;
-                    const newPrevBtn = document.getElementById('prevBtn');
-                    const newNextBtn = document.getElementById('nextBtn');
-                    newPrevBtn.disabled = journeyState.currentStepIndex === 0;
+                        </div>`;
+                } else if (stepId === 'final_offer') {
+                    footerHtml = ``; // No footer buttons on offer page
+                }
+                else {
+                    footerHtml = `
+                        <button id="prevBtn" class="bg-emerald-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-emerald-600 transition disabled:opacity-50">قبلی</button>
+                        <button id="nextBtn" class="btn-primary font-bold py-2 px-6 rounded-lg disabled:opacity-50">بعدی</button>`;
+                }
+                journeyFooter.innerHTML = footerHtml;
+
+                if (stepId === 'certificate') {
+                    document.getElementById('finishJourneyBtn').addEventListener('click', () => closeModal(journeyModal, journeyContainer));
+                    document.getElementById('downloadPdfBtn').addEventListener('click', generatePDF);
+                } else if (stepId !== 'final_offer') {
+                    const prevBtn = document.getElementById('prevBtn');
+                    const nextBtn = document.getElementById('nextBtn');
+                    
+                    prevBtn.disabled = journeyState.currentStepIndex === 0;
+                    prevBtn.addEventListener('click', () => { if (journeyState.currentStepIndex > 0) { journeyState.currentStepIndex--; renderJourneyStep(); } });
                     
                     let nextDisabled = false;
                     if (stepId.startsWith('quiz')) {
                         nextDisabled = journeyState.answers[journeyState.currentStepIndex] === undefined;
+                        nextBtn.textContent = 'بعدی';
+                    } else if (stepId === 'results') {
+                        nextBtn.textContent = 'شخصی‌سازی رایحه';
                     } else if (stepId === 'personalization') {
                         const totalNotes = Object.values(journeyState.selectedNotes).reduce((acc, notes) => acc + notes.length, 0);
-                        nextDisabled = !journeyState.perfumeName.trim() || totalNotes === 0;
+                        nextDisabled = !journeyState.perfumeName.trim() || !journeyState.customerName.trim() || totalNotes === 0;
+                        nextBtn.textContent = 'تایید و ادامه';
                     }
-                    newNextBtn.disabled = nextDisabled;
+                    nextBtn.disabled = nextDisabled;
 
-                    if (journeySteps[journeyState.currentStepIndex + 1] === 'results') {
-                        newNextBtn.textContent = 'مشاهده تحلیل';
-                    } else if (journeySteps[journeyState.currentStepIndex + 1] === 'personalization') {
-                        newNextBtn.textContent = 'شخصی‌سازی رایحه';
-                    } else if (journeySteps[journeyState.currentStepIndex + 1] === 'final_offer') {
-                        newNextBtn.textContent = 'تایید و ادامه';
-                    } else {
-                        newNextBtn.textContent = 'بعدی';
-                    }
+                    nextBtn.addEventListener('click', async () => {
+                        if (nextBtn.disabled) return;
+                        
+                        if (stepId === 'personalization') {
+                            const success = await submitScentData();
+                            if (!success) return; // Stop if API call fails
+                        }
 
-                    newNextBtn.addEventListener('click', () => {
-                        if (newNextBtn.disabled) return;
                         if (journeyState.currentStepIndex < journeySteps.length - 1) {
                             journeyState.currentStepIndex++;
                             renderJourneyStep();
                         }
                     });
-
-                    newPrevBtn.addEventListener('click', () => {
-                        if (journeyState.currentStepIndex > 0) {
-                            journeyState.currentStepIndex--;
-                            renderJourneyStep();
-                        }
-                    });
                 }
             }
+
+            function generatePDF() {
+                const pdfContainer = document.getElementById('certificatePDF');
+                const primary = archetypeData[journeyState.archetype.primary];
+                const secondary = archetypeData[journeyState.archetype.secondary];
+                const hybridTitle = `«${primary.title} با رگه‌هایی از ${secondary.title}»`;
+                const allNotes = [...journeyState.selectedNotes.top, ...journeyState.selectedNotes.middle, ...journeyState.selectedNotes.base];
+                const issueDate = new Intl.DateTimeFormat('fa-IR', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date());
+                const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent('https://aroma.com/cert/' + journeyState.uniqueId)}`;
+
+                pdfContainer.innerHTML = `
+                    <div class="pdf-border"></div>
+                    <div class="flex flex-col h-full" dir="rtl">
+                        <div class="flex justify-between items-start">
+                            <img src="https://raw.githubusercontent.com/Aromamaking/Aroma/main/logo.png" alt="آروما لوگو" class="brand-logo">
+                            <div class="text-center">
+                                <h2 class="font-cinzel">CERTIFICATE</h2>
+                                <p class="font-cinzel text-lg">OF SCENT AUTHENTICITY</p>
+                            </div>
+                            <div class="w-[100px]"></div>
+                        </div>
+                        <div class="flex-grow flex flex-col justify-center items-center text-center">
+                            <p>این شناسنامه اصالت رایحه، برای عطر</p>
+                            <h3 class="font-bold my-4 font-vazir">${journeyState.perfumeName}</h3>
+                            <p>که توسط <strong class="text-lg">${journeyState.customerName}</strong> خلق شده، صادر گردیده است.</p>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="text-right">
+                                <p><strong>آرکتایپ رایحه:</strong> ${hybridTitle}</p>
+                                <p><strong>نت‌های اصلی:</strong> ${allNotes.join('، ')}</p>
+                                <p><strong>کد انحصاری:</strong> ${journeyState.uniqueId}</p>
+                            </div>
+                            <div class="text-center">
+                                <img src="${qrCodeUrl}" alt="QR Code" class="qr-code">
+                                <p class="text-sm mt-1">پروفایل رایحه شما</p>
+                            </div>
+                            <div class="text-left">
+                                <p><strong>تاریخ صدور:</strong> ${issueDate}</p>
+                                <p class="font-cinzel mt-4">AROMA MASTER PERFUMER</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                const element = document.getElementById('certificatePDF');
+                const opt = {
+                    margin: 0,
+                    filename: `Aroma-Certificate-${journeyState.perfumeName.replace(/\s+/g, '-')}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 3, useCORS: true, letterRendering: true },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+                };
+                html2pdf().set(opt).from(element).save();
+            }
             
+            // --- Event Listeners ---
+            document.getElementById('startJourneyBtnHeader').addEventListener('click', openJourneyModal);
+            document.getElementById('startJourneyBtnHero').addEventListener('click', openJourneyModal);
+            document.getElementById('closeJourneyBtn').addEventListener('click', () => closeModal(journeyModal, journeyContainer));
+            
+            document.getElementById('openGuideBtn').addEventListener('click', () => openModal(guideModal, guideContainer));
+            document.getElementById('closeGuideBtn').addEventListener('click', () => closeModal(guideModal, guideContainer));
+
             // --- OCR Logic ---
             const startOcrBtn = document.getElementById('startOcrBtn');
             const ocrResultModal = document.getElementById('ocrResultModal');
@@ -939,17 +914,13 @@
             let stream;
 
             startOcrBtn.addEventListener('click', async () => {
-                cameraModal.classList.remove('hidden');
-                cameraModal.classList.add('flex');
-                setTimeout(() => cameraContainer.classList.remove('scale-95', 'opacity-0'), 10);
-                
+                openModal(cameraModal, cameraContainer);
                 try {
                     stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
                     cameraFeed.srcObject = stream;
                 } catch (err) {
                     console.error("Error accessing camera: ", err);
-                    // Show an error message to the user
-                    cameraModal.classList.add('hidden');
+                    closeModal(cameraModal, cameraContainer);
                 }
             });
 
@@ -957,8 +928,7 @@
                 if (stream) {
                     stream.getTracks().forEach(track => track.stop());
                 }
-                cameraModal.classList.add('hidden');
-                cameraContainer.classList.add('scale-95', 'opacity-0');
+                closeModal(cameraModal, cameraContainer);
             }
 
             closeCameraBtn.addEventListener('click', stopCamera);
@@ -968,66 +938,23 @@
                 photoCanvas.width = cameraFeed.videoWidth;
                 photoCanvas.height = cameraFeed.videoHeight;
                 context.drawImage(cameraFeed, 0, 0, photoCanvas.width, photoCanvas.height);
-                
                 stopCamera();
-
-                // Show loading/analyzing simulation
-                ocrResultContent.innerHTML = `
-                    <div class="text-center">
-                        <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-yellow-400 mx-auto"></div>
-                        <p class="mt-4 text-lg">در حال تحلیل تصویر با هوش مصنوعی...</p>
-                    </div>
-                `;
-                ocrResultModal.classList.remove('hidden');
-                ocrResultModal.classList.add('flex');
-                setTimeout(() => ocrResultContainer.classList.remove('scale-95', 'opacity-0'), 10);
-
-                // Simulate API call and show results
-                setTimeout(() => {
-                    showOcrResults();
-                }, 2500);
+                ocrResultContent.innerHTML = `<div class="text-center"><div class="animate-spin rounded-full h-16 w-16 border-b-2 border-yellow-400 mx-auto"></div><p class="mt-4 text-lg">در حال تحلیل تصویر...</p></div>`;
+                openModal(ocrResultModal, ocrResultContainer);
+                setTimeout(showOcrResults, 2500);
             });
             
             function showOcrResults() {
-                 ocrResultContent.innerHTML = `
-                    <div class="certificate-new p-8 max-w-4xl mx-auto animate-fade-in text-white">
-                        <div class="certificate-new-bg"></div>
-                        <div class="certificate-border"></div>
-                        <div class="relative z-10">
-                            <div class="text-center">
-                                <h2 class="font-cinzel text-3xl text-yellow-400 tracking-widest">ANALYSIS</h2>
-                                <p class="font-cinzel text-lg text-gray-200">OF SCENT PROFILE</p>
-                            </div>
-                            <div class="border-t border-yellow-400 opacity-50 my-6"></div>
-                            <div class="text-right space-y-2">
-                                <p class="text-lg text-right">تحلیل رایحه شناسایی شده <strong class="text-2xl font-bold text-yellow-300">Dior Sauvage</strong></p>
-                            </div>
-                            <div class="text-right space-y-2 pt-6 mt-6 border-t border-emerald-700">
-                                <p><strong class="text-yellow-400">خانواده بویایی:</strong> آروماتیک فوژه</p>
-                                <p><strong class="text-yellow-400">نت‌های آغازی:</strong> ترنج، فلفل</p>
-                                <p><strong class="text-yellow-400">نت‌های میانی:</strong> اسطوخودوس، شمعدانی، فلفل صورتی</p>
-                                <p><strong class="text-yellow-400">نت‌های پایانی:</strong> آمبروکسان، سدر، لابدانیوم</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                 ocrResultContent.innerHTML = `<div class="text-center"><h3 class="text-2xl font-bold text-yellow-400">Dior Sauvage</h3><div class="text-right mt-4 space-y-2"><p><strong>خانواده بویایی:</strong> آروماتیک فوژه</p><p><strong>نت‌های آغازی:</strong> ترنج، فلفل</p><p><strong>نت‌های میانی:</strong> اسطوخودوس، شمعدانی</p><p><strong>نت‌های پایانی:</strong> آمبروکسان، سدر</p></div></div>`;
             }
 
-            closeOcrResultBtn.addEventListener('click', () => {
-                ocrResultContainer.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => {
-                    ocrResultModal.classList.add('hidden');
-                    ocrResultModal.classList.remove('flex');
-                }, 300);
-            });
+            closeOcrResultBtn.addEventListener('click', () => closeModal(ocrResultModal, ocrResultContainer));
             
             // --- Smooth scrolling for anchor links ---
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
                 });
             });
         });
